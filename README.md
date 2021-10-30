@@ -12,7 +12,7 @@
 
 1.  权限管理模块使用了SpringSecurity，仓库地址：[SpringSecurity](https://gitee.com/WangFuGui-Ma/spring-security-spring-boot)
 2.  数据库技术使用了MybatisPlus,使用里面小功能自动生成代码
-3.  
+3.  Token管理使用JWT，仓库地址[JWT](https://gitee.com/WangFuGui-Ma/spring-boot-jwt)
 
 #### 参与贡献
 
