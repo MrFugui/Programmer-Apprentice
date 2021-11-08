@@ -1,5 +1,6 @@
 package com.wangfugui.apprentice.config;
 
+import com.wangfugui.apprentice.common.util.JwtTokenUtils;
 import com.wangfugui.apprentice.config.filter.JWTAuthenticationFilter;
 import com.wangfugui.apprentice.config.filter.JWTAuthorizationFilter;
 import com.wangfugui.apprentice.config.springsecurity.CustomUserDetailsService;
@@ -45,28 +46,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // post请求要关闭csrf验证,不然访问报错；实际开发中开启，需要前端配合传递其他参数
         http.csrf().disable()
                 .authorizeRequests()
+                //swagger
                 .antMatchers("/swagger-ui.html").anonymous()
                 .antMatchers("/swagger-resources/**").anonymous()
                 .antMatchers("/webjars/**").anonymous()
                 .antMatchers("/*/api-docs").anonymous()
+                //设置哪些路径不需要认证,这里也能放行静态资源
+                .antMatchers("/webSocket/**").anonymous()
+                .antMatchers("/static/**").anonymous()
+                .antMatchers("/css/**", "/js/**").anonymous()
+                .antMatchers("/favicon.ico").anonymous()
                 //放开注册,登录用户接口
                 .antMatchers("/user/register").anonymous()
                 .antMatchers("/user/login").anonymous()
                 .antMatchers("/login").anonymous()
-                .antMatchers("/loginvalidate").anonymous()
+                .antMatchers("/logoutSystem").anonymous()
                 .antMatchers("/chatroom").anonymous()
-                .antMatchers("/currentuser").anonymous()
                 .antMatchers("/onlineusers").anonymous()
-                .antMatchers("/webSocket/**").anonymous()
-                .antMatchers("/static/**").anonymous()  //设置哪些路径不需要认证,这里也能放行静态资源
-                .antMatchers("/css/**","/js/**").anonymous()
-                .antMatchers("/favicon.ico").anonymous()
+                .antMatchers("/currentuser").anonymous()
                 .anyRequest().authenticated() // 所有请求都需要验证
-//                .and()
-//                .formLogin()
-//                .loginPage("/login.html")
-//                .loginProcessingUrl("/loginvalidate")
-//                .permitAll()
+                .and()     //这里采用链式编程
+                .logout()
+                //注销成功后，调转的页面
+                .logoutSuccessUrl("/login")
+                // 配置自己的注销URL，默认为 /logout
+                .logoutUrl("/logoutSystem")
+                // 是否销毁session，默认ture
+                .invalidateHttpSession(true)
+                //  删除指定的cookies
+                .deleteCookies(JwtTokenUtils.TOKEN_HEADER)
                 .and()
                 //添加用户账号的认证
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
