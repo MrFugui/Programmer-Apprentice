@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -36,7 +37,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
         //这里特别注意是登录的接口，自定义登录接口，不写的话默认"/login"
-        super.setFilterProcessesUrl("/auth/login");
+        super.setFilterProcessesUrl("/loginvalidate");
     }
 
     @Override
@@ -79,6 +80,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 但是这里创建的token只是单纯的token
         // 按照jwt的规定，最后请求的时候应该是 `Bearer token`
         response.setHeader("Authorization", JwtTokenUtils.TOKEN_PREFIX + token);
+        response.addCookie(new Cookie("Authorization",token));
     }
 
     @Override

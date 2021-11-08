@@ -16,4 +16,12 @@ public interface UserService {
     ResponseUtils insertUser(User userInfo);
 
     ResponseUtils updatePwd(String oldPwd, String newPwd);
+
+    User getIdByUserName(String username);
+
+    String getpwdbyname(String name);
+
+    Long getUidbyname(String name);
+
+    String getnamebyid(long id);
 }

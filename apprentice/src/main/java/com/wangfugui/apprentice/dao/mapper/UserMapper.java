@@ -7,4 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper extends BaseMapper<User> {
 
+    User getIdByUserName(String username);
+
+    User getpwdbyname(String name);
+
+    User getnamebyid(long id);
 }

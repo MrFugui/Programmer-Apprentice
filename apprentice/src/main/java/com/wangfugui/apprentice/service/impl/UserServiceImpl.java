@@ -68,4 +68,41 @@ public class UserServiceImpl implements UserService{
         return ResponseUtils.success();
     }
 
+    @Override
+    public User getIdByUserName(String username) {
+
+        return  userMapper.getIdByUserName(username);
+    }
+
+
+    @Override
+    public String getpwdbyname(String name) {
+        User s=userMapper.getpwdbyname(name);
+        if(s!=null) {
+            return s.getPassword();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public Long getUidbyname(String name) {
+        User s=userMapper.getpwdbyname(name);
+        if(s!=null) {
+            return (long) s.getId();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public String getnamebyid(long id) {
+        User s=userMapper.getnamebyid(id);
+        if(s!=null) {
+            return s.getUsername();
+        } else {
+            return null;
+        }
+    }
+
 }
