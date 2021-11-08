@@ -20,6 +20,7 @@ import javax.websocket.Session;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -73,10 +74,10 @@ public class ChatController {
             return "login";
         }
         //如果没有cookie则返回登录页面
-        Cookie authCookie = Arrays.stream(cookies).filter(cookie -> cookie.getName()
-                .contains(JwtTokenUtils.TOKEN_HEADER)).collect(Collectors.toList()).get(0);
+        List<Cookie> collect = Arrays.stream(cookies).filter(cookie -> cookie.getName()
+                .contains(JwtTokenUtils.TOKEN_HEADER)).collect(Collectors.toList());
 
-        if (authCookie == null) {
+        if (collect.isEmpty()) {
             return "login";
         }
         return "home";
