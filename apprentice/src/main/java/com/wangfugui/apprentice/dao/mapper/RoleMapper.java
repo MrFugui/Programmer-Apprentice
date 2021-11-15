@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
  * @since JDK 1.8.0
  */
 @Repository
-public interface  RoleMapper  extends BaseMapper<Role> {
+public interface RoleMapper extends BaseMapper<Role> {
+
+
 }

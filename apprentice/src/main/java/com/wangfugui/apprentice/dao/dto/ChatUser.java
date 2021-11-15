@@ -1,4 +1,4 @@
-package com.wangfugui.apprentice.dao.domain;
+package com.wangfugui.apprentice.dao.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

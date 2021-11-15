@@ -2,7 +2,7 @@ package com.wangfugui.apprentice.service;
 
 
 import com.alibaba.fastjson.JSON;
-import com.wangfugui.apprentice.dao.domain.Message;
+import com.wangfugui.apprentice.dao.dto.Message;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;

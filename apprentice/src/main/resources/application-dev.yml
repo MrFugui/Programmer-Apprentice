@@ -10,3 +10,6 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+base:
+  javaDir: E:\msyWorkspace\Programmer-Apprentice\apprentice\src\main\java
+  mapperDir: E:\msyWorkspace\Programmer-Apprentice\apprentice\src\main\resources\mapper

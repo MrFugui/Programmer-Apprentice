@@ -2,7 +2,7 @@ package com.wangfugui.apprentice.controller;
 
 
 import com.wangfugui.apprentice.common.util.JwtTokenUtils;
-import com.wangfugui.apprentice.dao.domain.ChatUser;
+import com.wangfugui.apprentice.dao.dto.ChatUser;
 import com.wangfugui.apprentice.dao.domain.User;
 import com.wangfugui.apprentice.service.UserService;
 import com.wangfugui.apprentice.service.WebSocketServer;
