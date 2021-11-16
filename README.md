@@ -14,6 +14,7 @@
 2.  数据库技术使用了MybatisPlus,使用里面小功能自动生成代码
 3.  Token管理使用JWT，仓库地址[JWT](https://gitee.com/WangFuGui-Ma/spring-boot-jwt)
 4.  聊天模块集成websocket，仓库地址[SpringBoot+Websocket](https://gitee.com/WangFuGui-Ma/spring-boot-websocket)
+5.  springboot集成minio实现文件上传等功能，仓库地址[SpringBoot+MinIO](https://gitee.com/WangFuGui-Ma/spring-boot-minio)
 
 #### 参与贡献
 
