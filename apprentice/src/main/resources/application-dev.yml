@@ -13,3 +13,8 @@ mybatis-plus:
 base:
   javaDir: E:\msyWorkspace\Programmer-Apprentice\apprentice\src\main\java
   mapperDir: E:\msyWorkspace\Programmer-Apprentice\apprentice\src\main\resources\mapper
+#minio配置
+minio:
+  url: http://localhost:9000  #对象存储服务的URL
+  accessKey: root #Access key账户
+  secretKey: 123456  #Secret key密码
