@@ -44,6 +44,10 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         }
         // 如果请求头中有token，则进行解析，并且设置认证信息
         try {
+//            Authentication authentication =new Authentication() {
+//               //当authentication的isAuthenticated()方法为true时即代表通过验证，这里可以做自定义的操作
+//            }
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
             SecurityContextHolder.getContext().setAuthentication(getAuthentication(tokenHeader));
         } catch (TokenIsExpiredException e) {
             //返回json形式的错误信息
