@@ -15,6 +15,9 @@
 3.  Token管理使用JWT，仓库地址[JWT](https://gitee.com/WangFuGui-Ma/spring-boot-jwt)
 4.  聊天模块集成websocket，仓库地址[SpringBoot+Websocket](https://gitee.com/WangFuGui-Ma/spring-boot-websocket)
 5.  springboot集成minio实现文件上传等功能，仓库地址[SpringBoot+MinIO](https://gitee.com/WangFuGui-Ma/spring-boot-minio)
+6.  集成邮件发送功能实现邮件之间的通信，仓库地址[SpringBoot+Email](https://gitee.com/WangFuGui-Ma/spring-boot-email)
+7.  springboot集成reids实现该系统的非关系数据库需要的功能，仓库地址[SpringBoot+Redis](https://gitee.com/WangFuGui-Ma/spring-boot-redis)
+8.  集成图形验证码，实现注册登录等需要输入验证码的功能
 
 #### 参与贡献
 
