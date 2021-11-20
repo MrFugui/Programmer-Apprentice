@@ -79,7 +79,7 @@ class ApprenticeApplicationTests {
     RedisUtils redisUtils;
     @Test
     void redisTest() {
-        redisUtils.set("test", "test");
+        System.out.println(redisUtils.get("test"));
     }
 
 
