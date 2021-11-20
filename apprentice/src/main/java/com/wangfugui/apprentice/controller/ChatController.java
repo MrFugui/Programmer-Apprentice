@@ -6,6 +6,8 @@ import com.wangfugui.apprentice.dao.dto.ChatUser;
 import com.wangfugui.apprentice.dao.domain.User;
 import com.wangfugui.apprentice.service.UserService;
 import com.wangfugui.apprentice.service.WebSocketServer;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+@Api(tags = "聊天")
 @Controller
 public class ChatController {
 
@@ -33,6 +36,7 @@ public class ChatController {
 
 
     @RequestMapping("/onlineusers")
+    @ApiOperation("统计在线人数")
     @ResponseBody
     public Set<String> onlineusers(@RequestParam("currentuser") String currentuser) {
         ConcurrentHashMap<String, Session> map = WebSocketServer.getSessionPools();
@@ -49,6 +53,7 @@ public class ChatController {
     }
 
     @RequestMapping("/chatroom")
+    @ApiOperation("聊天室路由")
     public String chatroom(HttpServletRequest request) {
 
         Cookie[] cookies = request.getCookies();
@@ -68,6 +73,7 @@ public class ChatController {
     }
 
     @RequestMapping("/login")
+    @ApiOperation("登录路由")
     public String login(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies == null) {
@@ -84,6 +90,7 @@ public class ChatController {
     }
 
 
+    @ApiOperation("获取聊天用户")
     @RequestMapping(value = "/currentuser", method = RequestMethod.GET)
     @ResponseBody
     public ChatUser currentuser(HttpSession httpSession) {

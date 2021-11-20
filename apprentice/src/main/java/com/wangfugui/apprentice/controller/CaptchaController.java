@@ -3,6 +3,8 @@ package com.wangfugui.apprentice.controller;
 import com.wangfugui.apprentice.common.util.RedisUtils;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wf.captcha.SpecCaptcha;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,7 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+@Api(tags = "验证码")
 @Controller
 @RequestMapping("captcha")
 public class CaptchaController {
@@ -22,6 +25,7 @@ public class CaptchaController {
     private RedisUtils redisUtil;
     
     @ResponseBody
+    @ApiOperation("生成验证码")
     @GetMapping("/makeCaptcha")
     public ResponseUtils makeCaptcha() {
         SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 5);
@@ -37,6 +41,7 @@ public class CaptchaController {
     }
     
     @ResponseBody
+    @ApiOperation("校验验证码")
     @PostMapping("/getCaptcha")
     public ResponseUtils getCaptcha(String verCode,String verKey){
         // 获取redis中的验证码
