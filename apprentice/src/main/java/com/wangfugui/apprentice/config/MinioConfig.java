@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 @Configuration
 public class MinioConfig {
 	
@@ -17,8 +20,13 @@ public class MinioConfig {
     
     @Bean
     public MinioClient getMinioClient() {
-        return MinioClient.builder().endpoint(url)
-				.credentials(accessKey, secretKey).build();
+        try {
+            return MinioClient.builder().endpoint(new URL(url))
+                    .credentials(accessKey, secretKey).build();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
-    
+
 }
