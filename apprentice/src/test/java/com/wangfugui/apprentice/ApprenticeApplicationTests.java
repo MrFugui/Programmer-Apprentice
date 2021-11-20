@@ -3,6 +3,7 @@ package com.wangfugui.apprentice;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.wangfugui.apprentice.common.util.RedisUtils;
 import com.wangfugui.apprentice.dao.domain.User;
 import com.wangfugui.apprentice.dao.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
@@ -73,6 +74,13 @@ class ApprenticeApplicationTests {
                 .execute();
     }
 
+
+    @Autowired
+    RedisUtils redisUtils;
+    @Test
+    void redisTest() {
+        redisUtils.set("test", "test");
+    }
 
 
 }
