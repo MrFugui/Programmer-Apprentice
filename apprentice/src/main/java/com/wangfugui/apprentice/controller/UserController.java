@@ -2,6 +2,7 @@ package com.wangfugui.apprentice.controller;
 
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.User;
+import com.wangfugui.apprentice.dao.dto.UserRegisterDto;
 import com.wangfugui.apprentice.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -56,7 +57,7 @@ public class UserController {
 
     @PostMapping("/register")
     @ApiOperation("用户注册")
-    public ResponseUtils register(@RequestBody User userInfo){
+    public ResponseUtils register(@RequestBody UserRegisterDto userInfo){
         return userService.insertUser(userInfo);
     }
 

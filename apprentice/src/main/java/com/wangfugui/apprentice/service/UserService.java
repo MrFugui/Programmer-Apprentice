@@ -2,6 +2,7 @@ package com.wangfugui.apprentice.service;
 
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.User;
+import com.wangfugui.apprentice.dao.dto.UserRegisterDto;
 
 /**
  * @author MaSiyi
@@ -13,7 +14,7 @@ public interface UserService {
 
     User getUserInfo(String username);
 
-    ResponseUtils insertUser(User userInfo);
+    ResponseUtils insertUser(UserRegisterDto userInfo);
 
     ResponseUtils updatePwd(String oldPwd, String newPwd);
 

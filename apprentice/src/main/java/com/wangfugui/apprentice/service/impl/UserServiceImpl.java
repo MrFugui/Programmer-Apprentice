@@ -1,9 +1,12 @@
 package com.wangfugui.apprentice.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.wangfugui.apprentice.common.util.RedisUtils;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.User;
+import com.wangfugui.apprentice.dao.dto.UserRegisterDto;
 import com.wangfugui.apprentice.dao.mapper.UserMapper;
 import com.wangfugui.apprentice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -26,6 +30,8 @@ public class UserServiceImpl implements UserService{
     private UserMapper userMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @Override
     public ResponseUtils listUser() {
@@ -41,9 +47,25 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public ResponseUtils insertUser(User userInfo){
+    public ResponseUtils insertUser(UserRegisterDto userInfo){
+        //验证验证码是否正确
+        String ver = redisUtils.getStr(userInfo.getVerKey());
+        if (StrUtil.isEmpty(ver)) {
+            return ResponseUtils.msg("系统错误");
+        }
+        if (!userInfo.getVerCode().equals(ver)) {
+            return ResponseUtils.msg("验证码错误");
+        }
+        //验证是否已经有该用户了
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.lambda().eq(User::getUsername, userInfo.getUsername());
+        User user = userMapper.selectOne(userQueryWrapper);
+        if (!ObjectUtils.isEmpty(user)) {
+            return ResponseUtils.msg("已经有该用户");
+        }
         // 加密密码
         userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+
         return ResponseUtils.success(userMapper.insert(userInfo));
     }
 
