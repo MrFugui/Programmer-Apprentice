@@ -18,5 +18,8 @@ public class UserRegisterDto extends User {
     @ApiModelProperty("验证码key")
     private String verKey;
 
+    @ApiModelProperty("再次确认密码")
+    private String rePassWord;
+
 
 }

@@ -3,6 +3,7 @@ package com.wangfugui.apprentice.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.wangfugui.apprentice.common.constant.CodeEnums;
 import com.wangfugui.apprentice.common.util.RedisUtils;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.User;
@@ -42,19 +43,24 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUserInfo(String username){
         QueryWrapper<User> objectQueryWrapper = new QueryWrapper<>();
-        objectQueryWrapper.eq("username",username);
+        objectQueryWrapper.lambda().eq(User::getUsername,username);
         return userMapper.selectOne(objectQueryWrapper);
     }
 
     @Override
     public ResponseUtils insertUser(UserRegisterDto userInfo){
+        //验证两次密码输入是否一致
+        String rePassWord = userInfo.getRePassWord();
+        if (!userInfo.getPassword().equals(rePassWord)) {
+            return ResponseUtils.build(CodeEnums.PASSWORD_ERROR);
+        }
         //验证验证码是否正确
         String ver = redisUtils.getStr(userInfo.getVerKey());
         if (StrUtil.isEmpty(ver)) {
-            return ResponseUtils.msg("系统错误");
+            return ResponseUtils.msg("请刷新验证码");
         }
         if (!userInfo.getVerCode().equals(ver)) {
-            return ResponseUtils.msg("验证码错误");
+            return ResponseUtils.build(CodeEnums.VER_ERROR);
         }
         //验证是否已经有该用户了
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();

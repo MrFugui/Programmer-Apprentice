@@ -9,6 +9,8 @@ public enum CodeEnums {
     NO_USER("0101", "用户不存在"),
     PASSWORD_ERROR("0102", "密码错误"),
     AUTH_ERROR("0103", "认证失败"),
+    VER_ERROR("0104", "验证码错误"),
+
 
     NO_CORRECT("0401", "请求不符，提示用户"),
     NOT_SAFE("0402", "您的账户存在安全隐患，请重新登陆"),
