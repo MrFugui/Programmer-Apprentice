@@ -18,6 +18,7 @@
 6.  集成邮件发送功能实现邮件之间的通信，仓库地址[SpringBoot+Email](https://gitee.com/WangFuGui-Ma/spring-boot-email)
 7.  springboot集成reids实现该系统的非关系数据库需要的功能，仓库地址[SpringBoot+Redis](https://gitee.com/WangFuGui-Ma/spring-boot-redis)
 8.  集成图形验证码，实现注册登录等需要输入验证码的功能
+9.  集成ElasticSearch，实现系统的搜索功能，仓库地址[SpringBoot+ElasticSearch](https://gitee.com/WangFuGui-Ma/spring-boot-elasticSearch)
 
 #### 参与贡献
 
