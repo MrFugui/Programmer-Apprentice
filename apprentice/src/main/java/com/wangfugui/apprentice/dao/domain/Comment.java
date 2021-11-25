@@ -2,11 +2,12 @@ package com.wangfugui.apprentice.dao.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.sql.Blob;
 import java.time.LocalDateTime;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * <p>
@@ -27,6 +28,9 @@ public class Comment implements Serializable {
 
     @ApiModelProperty("动态id")
     private Integer dynamicId;
+
+    @ApiModelProperty("博客id")
+    private Integer blogId;
 
     @ApiModelProperty("评论内容")
     private String commentText;

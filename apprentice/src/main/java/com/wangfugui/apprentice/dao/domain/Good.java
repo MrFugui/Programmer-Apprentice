@@ -2,10 +2,11 @@ package com.wangfugui.apprentice.dao.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -26,6 +27,9 @@ public class Good implements Serializable {
 
     @ApiModelProperty("动态表id")
     private Integer dynamicId;
+
+    @ApiModelProperty("博客id")
+    private Integer blogId;
 
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime;

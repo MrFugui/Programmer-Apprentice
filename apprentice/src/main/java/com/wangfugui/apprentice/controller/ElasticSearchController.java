@@ -24,7 +24,7 @@ import java.util.List;
  * @since JDK 1.8.0
  */
 @RestController
-@RequestMapping("/elasticSearch")
+@RequestMapping( "/elasticSearch")
 @Api(tags = "elasticSearch操作")
 public class ElasticSearchController {
 
@@ -60,7 +60,7 @@ public class ElasticSearchController {
     }
 
     /**添加文档*/
-    @PostMapping("/addDocument")
+    @PostMapping("/addDocumentId")
     @ApiOperation("添加文档自定义id")
     public ResponseUtils addDocumentId(@RequestBody Dynamic dynamic, @RequestParam String index,@RequestParam String id) throws IOException {
         return ResponseUtils.success(elasticSearchUtil.addDocumentId(dynamic,index,id));

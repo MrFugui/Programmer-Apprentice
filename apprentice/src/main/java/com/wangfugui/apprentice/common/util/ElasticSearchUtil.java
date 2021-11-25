@@ -184,6 +184,7 @@ public class ElasticSearchUtil {
     }
 
     public IndexResponse addDocumentId(Dynamic dynamic, String index, String id) throws IOException {
+
         IndexRequest request = new IndexRequest(index);
         //设置超时时间
         request.id(id);
