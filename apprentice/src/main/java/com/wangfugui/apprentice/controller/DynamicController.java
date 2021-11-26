@@ -3,6 +3,7 @@ package com.wangfugui.apprentice.controller;
 
 import com.wangfugui.apprentice.dao.domain.Dynamic;
 import com.wangfugui.apprentice.service.IDynamicService;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/apprentice/dynamic")
+@Api("动态管理")
 public class DynamicController extends BaseController<IDynamicService, Dynamic>{
 
 }

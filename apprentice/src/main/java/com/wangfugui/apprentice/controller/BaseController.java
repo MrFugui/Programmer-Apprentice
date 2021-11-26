@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/** 核心公共controller类
+ * @Param:
+ * @return:
+ * @Author: MaSiyi
+ * @Date: 2021/11/26
+ */
 public class BaseController<S extends IService<E>, E> {
 
     @Autowired
