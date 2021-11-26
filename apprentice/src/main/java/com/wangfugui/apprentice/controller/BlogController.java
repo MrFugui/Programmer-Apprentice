@@ -1,9 +1,10 @@
 package com.wangfugui.apprentice.controller;
 
 
+import com.wangfugui.apprentice.dao.domain.Blog;
+import com.wangfugui.apprentice.service.IBlogService;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -13,9 +14,11 @@ import org.springframework.stereotype.Controller;
  * @author MrFugui
  * @since 2021-11-25
  */
-@Controller
+@RestController
 @RequestMapping("/apprentice/blog")
-public class BlogController {
+public class BlogController extends BaseController<IBlogService, Blog>{
+
+
 
 }
 

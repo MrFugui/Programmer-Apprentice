@@ -1,7 +1,7 @@
 package com.wangfugui.apprentice.service;
 
-import com.wangfugui.apprentice.dao.domain.Blog;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wangfugui.apprentice.dao.domain.Blog;
 
 /**
  * <p>

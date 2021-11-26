@@ -1,9 +1,10 @@
 package com.wangfugui.apprentice.dao.domain;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -16,9 +17,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "Blog对象", description = "博客表")
 public class Blog implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
-      private Integer id;
+    private Integer id;
 
     @ApiModelProperty("博客标题")
     private String blogTitle;
@@ -175,20 +174,20 @@ public class Blog implements Serializable {
     @Override
     public String toString() {
         return "Blog{" +
-        "id=" + id +
-        ", blogTitle=" + blogTitle +
-        ", blogText=" + blogText +
-        ", fileId=" + fileId +
-        ", goodNumber=" + goodNumber +
-        ", talkNumber=" + talkNumber +
-        ", createTime=" + createTime +
-        ", deleteFlag=" + deleteFlag +
-        ", createUser=" + createUser +
-        ", lookNumber=" + lookNumber +
-        ", starNumber=" + starNumber +
-        ", creation=" + creation +
-        ", blogStatus=" + blogStatus +
-        ", copyrightLink=" + copyrightLink +
-        "}";
+                "id=" + id +
+                ", blogTitle=" + blogTitle +
+                ", blogText=" + blogText +
+                ", fileId=" + fileId +
+                ", goodNumber=" + goodNumber +
+                ", talkNumber=" + talkNumber +
+                ", createTime=" + createTime +
+                ", deleteFlag=" + deleteFlag +
+                ", createUser=" + createUser +
+                ", lookNumber=" + lookNumber +
+                ", starNumber=" + starNumber +
+                ", creation=" + creation +
+                ", blogStatus=" + blogStatus +
+                ", copyrightLink=" + copyrightLink +
+                "}";
     }
 }
