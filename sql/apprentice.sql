@@ -11,11 +11,91 @@
  Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 22/11/2021 15:55:38
+ Date: 27/11/2021 09:42:33
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for blog
+-- ----------------------------
+DROP TABLE IF EXISTS `blog`;
+CREATE TABLE `blog`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `blog_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '博客标题',
+  `blog_text` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '博客内容',
+  `file_id` int(11) NULL DEFAULT NULL COMMENT '图片id',
+  `good_number` int(11) NULL DEFAULT NULL COMMENT '点赞数量',
+  `talk_number` int(11) NULL DEFAULT NULL COMMENT '评论数量',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `delete_flag` tinyint(1) NULL DEFAULT NULL COMMENT '是否删除',
+  `create_user` int(11) NULL DEFAULT NULL COMMENT '创建人',
+  `look_number` int(11) NULL DEFAULT NULL COMMENT '浏览量',
+  `star_number` int(11) NULL DEFAULT NULL COMMENT '收藏量',
+  `creation` tinyint(1) NULL DEFAULT NULL COMMENT '0原创1转载',
+  `blog_status` tinyint(2) NULL DEFAULT NULL COMMENT '0未审核1审核中2审核失败3已发布',
+  `copyright_link` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '版权地址',
+  `elsearch_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'elasticSearch中的ID',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '博客表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of blog
+-- ----------------------------
+INSERT INTO `blog` VALUES (1, 'string', 'string', 0, 1, 7, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (2, 'string', 'string', 0, 2, 6, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (3, 'string', 'string', 0, 3, 5, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (4, 'string', 'string', 0, 4, 4, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (5, 'string', 'string', 0, 5, 3, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (6, 'string', 'string', 0, 6, 2, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (7, 'string', 'string', 0, 7, 1, NULL, 0, NULL, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (8, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `blog` VALUES (9, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `blog` VALUES (10, 'string', 'string', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (11, 'string', 'string', 0, 0, 0, '2021-11-27 01:13:02', 0, 0, 0, 0, 0, 0, 'string', 'WJ4MX30B9JvC1FeAomZQ');
+
+-- ----------------------------
+-- Table structure for comment
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `dynamic_id` int(11) NULL DEFAULT NULL COMMENT '动态id',
+  `blog_id` int(11) NULL DEFAULT NULL COMMENT '博客id',
+  `comment_text` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '评论内容',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_user` int(11) NULL DEFAULT NULL COMMENT '创建人',
+  `good_number` int(11) NULL DEFAULT NULL COMMENT '点赞数量',
+  `delete_flag` tinyblob NULL COMMENT '是否删除',
+  `talk_number` int(11) NULL DEFAULT NULL COMMENT '评论数量',
+  `comment_id` int(11) NULL DEFAULT NULL COMMENT '评论表父id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for dynamic
+-- ----------------------------
+DROP TABLE IF EXISTS `dynamic`;
+CREATE TABLE `dynamic`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '表id',
+  `dynamic_text` varchar(5000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '动态内容',
+  `file_id` int(11) NULL DEFAULT NULL COMMENT '图片id',
+  `good_number` int(11) NULL DEFAULT NULL COMMENT '点赞数量',
+  `talk_number` int(11) NULL DEFAULT NULL COMMENT '评论数量',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `delete_flag` tinyint(1) NULL DEFAULT NULL COMMENT '是否删除',
+  `create_user` int(11) NULL DEFAULT NULL COMMENT '创建人',
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '动态表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of dynamic
+-- ----------------------------
+INSERT INTO `dynamic` VALUES (1, 'string', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 'string');
+INSERT INTO `dynamic` VALUES (2, 'string', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 'string');
+INSERT INTO `dynamic` VALUES (3, 'string', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 'string');
 
 -- ----------------------------
 -- Table structure for function
@@ -105,6 +185,19 @@ INSERT INTO `function` VALUES (247, '010105', '多属性', '0101', '/material/ma
 INSERT INTO `function` VALUES (248, '030150', '调拨明细', '0301', '/report/allocation_detail', '/report/AllocationDetail', b'0', '0646', b'1', '电脑版', '', 'profile', '0');
 
 -- ----------------------------
+-- Table structure for good
+-- ----------------------------
+DROP TABLE IF EXISTS `good`;
+CREATE TABLE `good`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '点赞表id',
+  `blog_id` int(11) NULL DEFAULT NULL COMMENT '博客id',
+  `dynamic_id` int(11) NULL DEFAULT NULL COMMENT '动态表id',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `create_user` int(11) NULL DEFAULT NULL COMMENT '创建用户',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '点赞表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for role
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
@@ -141,7 +234,7 @@ CREATE TABLE `user`  (
   `update_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
   `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -151,6 +244,7 @@ INSERT INTO `user` VALUES (2, NULL, 'admin', '123', 1, NULL, 1, NULL, NULL, 0, N
 INSERT INTO `user` VALUES (4, NULL, 'wangfugui', '$2a$10$gpq7aq5CM0JijheXM7M53.SaM/5t6JZFa9oTH3HfMIJ3fgT4BWTYO', 1, NULL, 1, NULL, NULL, 0, NULL, '2021-10-25 10:44:40', NULL);
 INSERT INTO `user` VALUES (5, NULL, '123', '$2a$10$guUqq8QDoSqT6tuYjLAJBetAPWFJSL4QBVmnrUAT.T42AmEpiG3.q', 2, NULL, 1, NULL, NULL, 0, NULL, '2021-10-30 11:48:32', NULL);
 INSERT INTO `user` VALUES (7, NULL, 'masiyi', '$2a$10$jo4bwvJS5pRYbn7Zqv7YD.sAbOBn.SY2i8ZiIZXptnyHMT60Vorfy', NULL, NULL, 1, NULL, NULL, 0, NULL, '2021-11-08 10:42:50', NULL);
+INSERT INTO `user` VALUES (8, 'string', 'string', '$2a$10$IT.A7pXA1Mxy63zf07qscu8lf.g4jLJOSWnTBvNDiM0.OGnEZoHmu', 0, 'string', 0, NULL, 'string', 0, NULL, '2021-11-22 16:38:58', 'string');
 
 -- ----------------------------
 -- Table structure for user_business
@@ -209,5 +303,21 @@ INSERT INTO `user_business` VALUES (57, 'UserCustomer', '121', '[56]', NULL, '0'
 INSERT INTO `user_business` VALUES (67, 'UserRole', '131', '[17]', NULL, '0');
 INSERT INTO `user_business` VALUES (68, 'RoleFunctions', '16', '[210]', NULL, '0');
 INSERT INTO `user_business` VALUES (69, 'RoleFunctions', '17', '[210][211][241][33][199][242][41][200][201][202][40][232][233][197][203][204][205][206][212]', '[{\"funId\":\"241\",\"btnStr\":\"1,2\"},{\"funId\":\"33\",\"btnStr\":\"1,2\"},{\"funId\":\"199\",\"btnStr\":\"1,2\"},{\"funId\":\"242\",\"btnStr\":\"1,2\"},{\"funId\":\"41\",\"btnStr\":\"1,2\"},{\"funId\":\"200\",\"btnStr\":\"1,2\"},{\"funId\":\"210\",\"btnStr\":\"1,2\"},{\"funId\":\"211\",\"btnStr\":\"1,2\"},{\"funId\":\"197\",\"btnStr\":\"1\"},{\"funId\":\"203\",\"btnStr\":\"1\"},{\"funId\":\"204\",\"btnStr\":\"1\"},{\"funId\":\"205\",\"btnStr\":\"1\"},{\"funId\":\"206\",\"btnStr\":\"1\"},{\"funId\":\"212\",\"btnStr\":\"1\"},{\"funId\":\"201\",\"btnStr\":\"1,2\"},{\"funId\":\"202\",\"btnStr\":\"1,2\"},{\"funId\":\"40\",\"btnStr\":\"1,2\"},{\"funId\":\"232\",\"btnStr\":\"1,2\"},{\"funId\":\"233\",\"btnStr\":\"1,2\"}]', '0');
+
+-- ----------------------------
+-- Table structure for user_statistics
+-- ----------------------------
+DROP TABLE IF EXISTS `user_statistics`;
+CREATE TABLE `user_statistics`  (
+  `id` int(11) NOT NULL COMMENT 'id',
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '用户id',
+  `followers` int(11) NULL DEFAULT NULL COMMENT '粉丝数量',
+  `following` int(11) NULL DEFAULT NULL COMMENT '关注数量',
+  `good_number` int(11) NULL DEFAULT NULL COMMENT '点赞数量',
+  `watch_number` int(11) NULL DEFAULT NULL COMMENT '访问数量',
+  `master_number` int(11) NULL DEFAULT NULL COMMENT '师傅数量',
+  `apprentice_number` int(11) NULL DEFAULT NULL COMMENT '徒弟数量',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户统计表' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

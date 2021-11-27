@@ -1,7 +1,6 @@
 package com.wangfugui.apprentice.common.util;
 
 import com.alibaba.fastjson.JSON;
-import com.wangfugui.apprentice.dao.domain.Dynamic;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -50,7 +49,14 @@ public class ElasticSearchUtil {
     @Qualifier("restHighLevelClient")
     private RestHighLevelClient client;
 
-    //索引的创建
+    /**
+     * 索引的创建
+     *
+     * @Param:
+     * @return:
+     * @Author: MaSiyi
+     * @Date: 2021/11/27
+     */
     public CreateIndexResponse createIndex(String index) throws IOException {
         //1.创建索引的请求
         CreateIndexRequest request = new CreateIndexRequest(index);
@@ -60,7 +66,9 @@ public class ElasticSearchUtil {
         return response;
     }
 
-    //索引是否存在
+    /**
+     * 索引是否存在
+     */
     public Boolean existIndex(String index) throws IOException {
         //1.创建索引的请求
         GetIndexRequest request = new GetIndexRequest(index);
@@ -70,7 +78,9 @@ public class ElasticSearchUtil {
         return exist;
     }
 
-    //删除索引
+    /**
+     * 删除索引
+     */
     public Boolean deleteIndex(String index) throws IOException {
         DeleteIndexRequest request = new DeleteIndexRequest(index);
         AcknowledgedResponse delete = client.indices().delete(request, RequestOptions.DEFAULT);
@@ -78,13 +88,15 @@ public class ElasticSearchUtil {
         return delete.isAcknowledged();
     }
 
-    //添加文档
-    public IndexResponse addDocument(Dynamic dynamic, String index) throws IOException {
+    /**
+     * 添加文档
+     */
+    public IndexResponse addDocument(Object object, String index) throws IOException {
         IndexRequest request = new IndexRequest(index);
         //设置超时时间
         request.timeout("1s");
         //将数据放到json字符串
-        request.source(JSON.toJSONString(dynamic), XContentType.JSON);
+        request.source(JSON.toJSONString(object), XContentType.JSON);
         //发送请求
         IndexResponse response = client.index(request, RequestOptions.DEFAULT);
         log.info("添加文档-------" + response.toString());
@@ -92,7 +104,9 @@ public class ElasticSearchUtil {
         return response;
     }
 
-    //文档是否存在
+    /**
+     * 文档是否存在
+     */
     public Boolean existDocument(String index, String documents) throws IOException {
         //文档的 没有index
         GetRequest request = new GetRequest(index, documents);
@@ -102,7 +116,9 @@ public class ElasticSearchUtil {
         return exist;
     }
 
-    //获取文档
+    /**
+     * 获取文档
+     */
     public GetResponse getDocument(String index, String documents) throws IOException {
         GetRequest request = new GetRequest(index, documents);
         GetResponse response = client.get(request, RequestOptions.DEFAULT);
@@ -111,13 +127,15 @@ public class ElasticSearchUtil {
         return response;
     }
 
-    //修改文档
-    public UpdateResponse updateDocument(Dynamic dynamic, String index, String documents) throws IOException {
+    /**
+     * 修改文档
+     */
+    public UpdateResponse updateDocument(Object object, String index, String documents) throws IOException {
 
         //修改是id为1的
         UpdateRequest request = new UpdateRequest(index, documents);
         request.timeout("1s");
-        request.doc(JSON.toJSONString(dynamic), XContentType.JSON);
+        request.doc(JSON.toJSONString(object), XContentType.JSON);
 
         UpdateResponse response = client.update(request, RequestOptions.DEFAULT);
         log.info("修改文档-----" + response);
@@ -127,7 +145,9 @@ public class ElasticSearchUtil {
     }
 
 
-    //删除文档
+    /**
+     * 删除文档
+     */
     public RestStatus deleteDocument(String index, String documents) throws IOException {
         DeleteRequest request = new DeleteRequest(index, documents);
         request.timeout("1s");
@@ -136,19 +156,21 @@ public class ElasticSearchUtil {
         return response.status();
     }
 
-    //批量添加文档
-    public BulkResponse bulkAddDocument(List<Dynamic> dynamics) throws IOException {
+    /**
+     * 批量添加文档
+     */
+    public BulkResponse bulkAddDocument(List<?> object) throws IOException {
 
         //批量操作的Request
         BulkRequest request = new BulkRequest();
         request.timeout("1s");
 
         //批量处理请求
-        for (int i = 0; i < dynamics.size(); i++) {
+        for (int i = 0; i < object.size(); i++) {
             request.add(
                     new IndexRequest("lisen_index")
                             .id("" + (i + 1))
-                            .source(JSON.toJSONString(dynamics.get(i)), XContentType.JSON)
+                            .source(JSON.toJSONString(object.get(i)), XContentType.JSON)
             );
         }
         BulkResponse response = client.bulk(request, RequestOptions.DEFAULT);
@@ -160,7 +182,9 @@ public class ElasticSearchUtil {
     }
 
 
-    //查询文档
+    /**
+     * 查询文档
+     */
     public SearchResponse searchDocument(String index) throws IOException {
         SearchRequest request = new SearchRequest(index);
         //构建搜索条件
@@ -183,17 +207,53 @@ public class ElasticSearchUtil {
         return response;
     }
 
-    public IndexResponse addDocumentId(Dynamic dynamic, String index, String id) throws IOException {
+    /**
+     * 添加文档自定义id
+     */
+    public IndexResponse addDocumentId(Object object, String index, String id) throws IOException {
 
         IndexRequest request = new IndexRequest(index);
         //设置超时时间
         request.id(id);
         //将数据放到json字符串
-        request.source(JSON.toJSONString(dynamic), XContentType.JSON);
+        request.source(JSON.toJSONString(object), XContentType.JSON);
         //发送请求
         IndexResponse response = client.index(request, RequestOptions.DEFAULT);
         log.info("添加文档-------" + response.toString());
         log.info("添加文档-------" + response.status());
         return response;
+    }
+
+    /**
+     * 传入实体类存储
+     *
+     * @Param:
+     * @return:
+     * @Author: MaSiyi
+     * @Date: 2021/11/27
+     */
+    public IndexResponse addEntity(Object object, String index, String id) throws IOException {
+        boolean existIndex = this.existIndex(index);
+        if (!existIndex) {
+            createIndex(index);
+
+        }
+        return addDocumentId(object, index, id);
+    }
+    /**
+     * 传入实体类存储
+     *
+     * @Param:
+     * @return:
+     * @Author: MaSiyi
+     * @Date: 2021/11/27
+     */
+    public IndexResponse addEntity(Object object, String index) throws IOException {
+        boolean existIndex = this.existIndex(index);
+        if (!existIndex) {
+            createIndex(index);
+
+        }
+        return addDocument(object, index);
     }
 }

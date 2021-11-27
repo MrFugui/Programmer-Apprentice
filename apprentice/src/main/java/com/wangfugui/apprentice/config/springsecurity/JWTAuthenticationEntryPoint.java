@@ -1,7 +1,7 @@
 package com.wangfugui.apprentice.config.springsecurity;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wangfugui.apprentice.common.constant.CodeEnums;
+import com.wangfugui.apprentice.common.constant.enums.CodeEnums;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
