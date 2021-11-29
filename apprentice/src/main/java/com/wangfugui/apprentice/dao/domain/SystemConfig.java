@@ -37,6 +37,7 @@ public class SystemConfig implements Serializable {
     private String value;
 
     @ApiModelProperty("组别")
+    @TableField("`group`")
     private String group;
 
     @ApiModelProperty("状态0开启1关闭")
