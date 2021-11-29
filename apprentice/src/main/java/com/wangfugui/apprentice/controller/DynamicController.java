@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/apprentice/dynamic")
-@Api("动态管理")
+@Api(tags = "动态管理")
 public class DynamicController extends BaseController<IDynamicService, Dynamic>{
 
 }

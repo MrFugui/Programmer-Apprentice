@@ -113,4 +113,12 @@ public class ElasticSearchController {
     }
 
 
+    /**搜索*/
+    @ApiOperation("搜索")
+    @GetMapping("/search")
+    public ResponseUtils search(@RequestParam String searchMatch,@RequestParam String searchStr) throws IOException {
+        return ResponseUtils.success(elasticSearchUtil.search(searchMatch,searchStr));
+    }
+
+
 }

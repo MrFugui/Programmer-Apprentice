@@ -23,6 +23,8 @@ import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.rest.RestStatus;
@@ -240,6 +242,7 @@ public class ElasticSearchUtil {
         }
         return addDocumentId(object, index, id);
     }
+
     /**
      * 传入实体类存储
      *
@@ -255,5 +258,17 @@ public class ElasticSearchUtil {
 
         }
         return addDocument(object, index);
+    }
+
+
+    public SearchResponse search(String searchMatch, String searchStr) throws IOException {
+        SearchRequest request = new SearchRequest();
+        //构建搜索条件
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        QueryBuilder queryBuilder = new MatchQueryBuilder(searchMatch, searchStr);
+        sourceBuilder.query(queryBuilder);
+        request.source(sourceBuilder);
+        return client.search(request, RequestOptions.DEFAULT);
+
     }
 }
