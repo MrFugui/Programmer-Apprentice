@@ -60,4 +60,6 @@ public class UserController {
     public ResponseUtils updatePwd(@RequestBody Map<String, String> map){
         return userService.updatePwd(map.get("oldPwd"), map.get("newPwd"));
     }
+
+
 }
