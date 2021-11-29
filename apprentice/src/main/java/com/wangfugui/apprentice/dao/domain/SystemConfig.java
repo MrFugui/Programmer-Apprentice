@@ -1,12 +1,14 @@
 package com.wangfugui.apprentice.dao.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -27,15 +29,18 @@ public class SystemConfig implements Serializable {
     private Integer id;
 
     @ApiModelProperty("key")
+    @TableField("`key`")
     private String key;
 
     @ApiModelProperty("value")
+    @TableField("`value`")
     private String value;
 
     @ApiModelProperty("组别")
     private String group;
 
     @ApiModelProperty("状态0开启1关闭")
+    @TableField("`status`")
     private Boolean status;
 
     @ApiModelProperty("创建时间")

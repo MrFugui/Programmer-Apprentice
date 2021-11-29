@@ -3,8 +3,8 @@ package com.wangfugui.apprentice.controller;
 
 import com.wangfugui.apprentice.dao.domain.SystemConfig;
 import com.wangfugui.apprentice.service.ISystemConfigService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author MrFugui
  * @since 2021-11-29
  */
-@Controller
+@RestController
 @RequestMapping("/apprentice/systemConfig")
 public class SystemConfigController extends BaseController<ISystemConfigService, SystemConfig>{
 

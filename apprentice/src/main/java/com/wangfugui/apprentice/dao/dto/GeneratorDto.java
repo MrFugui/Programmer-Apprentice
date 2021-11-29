@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class GeneratorDto {
 
-    @ApiModelProperty("项目位置")
+    @ApiModelProperty("项目位置src-main-java所在位置")
     private String dirUrl;
 
     @ApiModelProperty("表名称")
