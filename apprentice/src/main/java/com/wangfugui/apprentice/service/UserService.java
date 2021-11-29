@@ -12,7 +12,7 @@ import com.wangfugui.apprentice.dao.dto.UserRegisterDto;
 public interface UserService {
     ResponseUtils listUser();
 
-    User getUserInfo(String username);
+    User getUserInfoForName(String username);
 
     ResponseUtils insertUser(UserRegisterDto userInfo);
 
@@ -25,4 +25,13 @@ public interface UserService {
     Long getUidbyname(String name);
 
     String getnamebyid(long id);
+
+    /** 查询用户信息
+     * @Param: []
+     * @return: com.wangfugui.apprentice.dao.domain.User
+     * @Author: MaSiyi
+     * @Date: 2021/11/29
+     */
+    User getUserInfo();
+    
 }

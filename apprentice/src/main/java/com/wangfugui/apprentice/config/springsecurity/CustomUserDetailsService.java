@@ -32,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 通过用户名从数据库获取用户信息
-        User userInfo = userInfoService.getUserInfo(username);
+        User userInfo = userInfoService.getUserInfoForName(username);
         if (userInfo == null) {
             throw new UsernameNotFoundException("用户不存在");
         }

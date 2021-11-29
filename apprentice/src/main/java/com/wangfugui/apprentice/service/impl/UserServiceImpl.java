@@ -11,6 +11,7 @@ import com.wangfugui.apprentice.dao.dto.UserRegisterDto;
 import com.wangfugui.apprentice.dao.mapper.UserMapper;
 import com.wangfugui.apprentice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +26,7 @@ import java.util.List;
  * @since JDK 1.8.0
  */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -41,14 +42,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User getUserInfo(String username){
+    public User getUserInfoForName(String username) {
         QueryWrapper<User> objectQueryWrapper = new QueryWrapper<>();
-        objectQueryWrapper.lambda().eq(User::getUsername,username);
+        objectQueryWrapper.lambda().eq(User::getUsername, username);
         return userMapper.selectOne(objectQueryWrapper);
     }
 
     @Override
-    public ResponseUtils insertUser(UserRegisterDto userInfo){
+    public ResponseUtils insertUser(UserRegisterDto userInfo) {
         //验证两次密码输入是否一致
         String rePassWord = userInfo.getRePassWord();
         if (!userInfo.getPassword().equals(rePassWord)) {
@@ -82,7 +83,7 @@ public class UserServiceImpl implements UserService{
         String username = principal.getUsername();
 
         // 通过用户名获取到用户信息（获取密码）
-        User userInfo = this.getUserInfo(username);
+        User userInfo = this.getUserInfoForName(username);
 
         // 判断输入的旧密码是正确
         if (passwordEncoder.matches(oldPwd, userInfo.getPassword())) {
@@ -99,14 +100,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getIdByUserName(String username) {
 
-        return  userMapper.getIdByUserName(username);
+        return userMapper.getIdByUserName(username);
     }
 
 
     @Override
     public String getpwdbyname(String name) {
-        User s=userMapper.getpwdbyname(name);
-        if(s!=null) {
+        User s = userMapper.getpwdbyname(name);
+        if (s != null) {
             return s.getPassword();
         } else {
             return null;
@@ -115,8 +116,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Long getUidbyname(String name) {
-        User s=userMapper.getpwdbyname(name);
-        if(s!=null) {
+        User s = userMapper.getpwdbyname(name);
+        if (s != null) {
             return (long) s.getId();
         } else {
             return null;
@@ -125,12 +126,26 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String getnamebyid(long id) {
-        User s=userMapper.getnamebyid(id);
-        if(s!=null) {
+        User s = userMapper.getnamebyid(id);
+        if (s != null) {
             return s.getUsername();
         } else {
             return null;
         }
     }
 
+    /**
+     * 查询用户信息
+     *
+     * @Param: []
+     * @return: com.wangfugui.apprentice.dao.domain.User
+     * @Author: MaSiyi
+     * @Date: 2021/11/29
+     */
+    @Override
+    public User getUserInfo() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = (String) authentication.getPrincipal();
+        return this.getUserInfoForName(userName);
+    }
 }
