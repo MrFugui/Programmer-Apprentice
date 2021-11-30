@@ -3,12 +3,13 @@ package com.wangfugui.apprentice.controller;
 
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.service.IApprentService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -18,8 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author MrFugui
  * @since 2021-11-29
  */
-@Controller
+@RestController
 @RequestMapping("/apprentice/apprent")
+@Api(tags = "师徒管理")
 public class ApprentController {
 
     @Autowired

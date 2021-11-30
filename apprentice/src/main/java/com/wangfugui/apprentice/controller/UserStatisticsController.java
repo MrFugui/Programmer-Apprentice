@@ -1,9 +1,9 @@
 package com.wangfugui.apprentice.controller;
 
 
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -13,8 +13,9 @@ import org.springframework.stereotype.Controller;
  * @author MrFugui
  * @since 2021-11-25
  */
-@Controller
+@RestController
 @RequestMapping("/apprentice/userStatistics")
+@Api(tags = "用户统计")
 public class UserStatisticsController {
 
 }

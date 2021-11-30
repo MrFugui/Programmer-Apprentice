@@ -3,6 +3,7 @@ package com.wangfugui.apprentice.controller;
 
 import com.wangfugui.apprentice.dao.domain.SystemConfig;
 import com.wangfugui.apprentice.service.ISystemConfigService;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/apprentice/systemConfig")
+@Api(tags = "系统配置")
 public class SystemConfigController extends BaseController<ISystemConfigService, SystemConfig>{
 
 

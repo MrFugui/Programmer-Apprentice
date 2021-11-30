@@ -1,9 +1,11 @@
 package com.wangfugui.apprentice.controller;
 
 
+import com.wangfugui.apprentice.dao.domain.Notify;
+import com.wangfugui.apprentice.service.INotifyService;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -13,9 +15,10 @@ import org.springframework.stereotype.Controller;
  * @author MrFugui
  * @since 2021-11-30
  */
-@Controller
+@RestController
 @RequestMapping("/apprentice/notify")
-public class NotifyController {
+@Api(tags = "通知管理")
+public class NotifyController extends BaseController<INotifyService, Notify>{
 
 }
 

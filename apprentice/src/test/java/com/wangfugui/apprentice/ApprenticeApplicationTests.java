@@ -100,7 +100,7 @@ class ApprenticeApplicationTests {
                             .pathInfo(Collections.singletonMap(OutputFile.mapperXml, mapperDir)); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("notify"); // 设置需要生成的表名
+                    builder.addInclude("user_setting"); // 设置需要生成的表名
                 })
                 .execute();
     }
