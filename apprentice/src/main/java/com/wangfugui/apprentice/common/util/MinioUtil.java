@@ -26,6 +26,7 @@ import java.util.List;
 
 @Component
 public class MinioUtil {
+
 	@Autowired
     private MinioClient minioClient;
 	

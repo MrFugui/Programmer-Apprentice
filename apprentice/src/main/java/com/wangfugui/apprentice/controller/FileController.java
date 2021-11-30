@@ -29,12 +29,17 @@ public class FileController {
     @ApiOperation("上传一个文件")
     @RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
     public ResponseUtils fileupload(@RequestParam MultipartFile uploadfile, @RequestParam String bucket,
-                                    @RequestParam(required = false) String objectName) throws Exception {
-        minioUtil.createBucket(bucket);
-        if (objectName != null) {
-            minioUtil.uploadFile(uploadfile.getInputStream(), bucket, objectName + "/" + uploadfile.getOriginalFilename());
-        } else {
-            minioUtil.uploadFile(uploadfile.getInputStream(), bucket, uploadfile.getOriginalFilename());
+                                    @RequestParam(required = false) String objectName) {
+        try {
+            minioUtil.createBucket(bucket);
+            if (objectName != null) {
+                minioUtil.uploadFile(uploadfile.getInputStream(), bucket, objectName + "/" + uploadfile.getOriginalFilename());
+            } else {
+                minioUtil.uploadFile(uploadfile.getInputStream(), bucket, uploadfile.getOriginalFilename());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseUtils.msg("上传文件出错，请稍后再试");
         }
         return ResponseUtils.success();
     }

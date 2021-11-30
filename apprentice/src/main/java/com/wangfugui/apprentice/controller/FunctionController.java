@@ -8,6 +8,7 @@ import com.wangfugui.apprentice.dao.domain.Function;
 import com.wangfugui.apprentice.dao.domain.UserBusiness;
 import com.wangfugui.apprentice.service.IFunctionService;
 import com.wangfugui.apprentice.service.IUserBusinessService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -37,6 +38,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/apprentice/function")
 @Slf4j
+@Api(tags = "角色权限模块")
 public class FunctionController {
 
 

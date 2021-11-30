@@ -1,6 +1,6 @@
 package com.wangfugui.apprentice.common.util;
 
-import com.wangfugui.apprentice.common.constant.CodeEnums;
+import com.wangfugui.apprentice.common.constant.enums.CodeEnums;
 import lombok.Data;
 
 @Data

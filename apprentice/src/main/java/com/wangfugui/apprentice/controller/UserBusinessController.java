@@ -4,6 +4,7 @@ package com.wangfugui.apprentice.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.service.IUserBusinessService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 @RequestMapping("/apprentice/userBusiness")
+@Api(tags = "用户权限模块")
 public class UserBusinessController {
 
     @Autowired

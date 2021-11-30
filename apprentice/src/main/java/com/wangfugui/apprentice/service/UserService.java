@@ -2,6 +2,7 @@ package com.wangfugui.apprentice.service;
 
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.User;
+import com.wangfugui.apprentice.dao.dto.UserRegisterDto;
 
 /**
  * @author MaSiyi
@@ -11,9 +12,9 @@ import com.wangfugui.apprentice.dao.domain.User;
 public interface UserService {
     ResponseUtils listUser();
 
-    User getUserInfo(String username);
+    User getUserInfoForName(String username);
 
-    ResponseUtils insertUser(User userInfo);
+    ResponseUtils insertUser(UserRegisterDto userInfo);
 
     ResponseUtils updatePwd(String oldPwd, String newPwd);
 
@@ -24,4 +25,13 @@ public interface UserService {
     Long getUidbyname(String name);
 
     String getnamebyid(long id);
+
+    /** 查询用户信息
+     * @Param: []
+     * @return: com.wangfugui.apprentice.dao.domain.User
+     * @Author: MaSiyi
+     * @Date: 2021/11/29
+     */
+    User getUserInfo();
+    
 }
