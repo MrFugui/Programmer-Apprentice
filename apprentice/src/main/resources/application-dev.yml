@@ -19,7 +19,7 @@ spring:
   mail:
     host: smtp.163.com
     username: masiyi163163@163.com #发送邮件人的邮箱
-    password: NOTZSOMXJEEIDLNY #这个密码是邮箱设置里SMTP服务生成的授权码
+    password: NOTSFWRXJEEIDLNY #这个密码是邮箱设置里SMTP服务生成的授权码
     default-encoding: UTF-8
 mybatis-plus:
   configuration:
