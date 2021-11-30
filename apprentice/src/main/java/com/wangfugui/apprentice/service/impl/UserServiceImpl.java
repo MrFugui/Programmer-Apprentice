@@ -9,6 +9,7 @@ import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.User;
 import com.wangfugui.apprentice.dao.dto.UserRegisterDto;
 import com.wangfugui.apprentice.dao.mapper.UserMapper;
+import com.wangfugui.apprentice.service.IApprentService;
 import com.wangfugui.apprentice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -34,6 +35,8 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private RedisUtils redisUtils;
+    @Autowired
+    private IApprentService apprentService;
 
     @Override
     public ResponseUtils listUser() {
@@ -148,4 +151,5 @@ public class UserServiceImpl implements UserService {
         String userName = (String) authentication.getPrincipal();
         return this.getUserInfoForName(userName);
     }
+
 }
