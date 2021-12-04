@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
-import com.surenpi.jenkins.client.Jenkins;
 import com.wangfugui.apprentice.common.util.RedisUtils;
 import com.wangfugui.apprentice.dao.domain.Dynamic;
 import com.wangfugui.apprentice.dao.domain.User;
@@ -41,7 +40,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -102,7 +100,7 @@ class ApprenticeApplicationTests {
                             .pathInfo(Collections.singletonMap(OutputFile.mapperXml, mapperDir)); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("user_setting"); // 设置需要生成的表名
+                    builder.addInclude("user_extend"); // 设置需要生成的表名
                 })
                 .execute();
     }
@@ -281,12 +279,6 @@ class ApprenticeApplicationTests {
 //        测试查询文档--遍历参数--{name=cyx1, age=5}
     }
 
-    @Test
-    void jenkonstest() {
-        URI serverURI = new URI("http://localhost:8080/jenkins");
-        Jenkins jenkins = new Jenkins(serverURI,"admin","admin");
-
-    }
 
 
 }

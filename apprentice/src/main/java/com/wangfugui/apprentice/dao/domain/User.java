@@ -45,9 +45,6 @@ public class User {
     private Date createTime;
     private Date updateTime;
 
-    @ApiModelProperty("昵称")
-    private String nickname;
-
     @ApiModelProperty("角色id")
     private Integer roleId;
 
