@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
+import com.surenpi.jenkins.client.Jenkins;
 import com.wangfugui.apprentice.common.util.RedisUtils;
 import com.wangfugui.apprentice.dao.domain.Dynamic;
 import com.wangfugui.apprentice.dao.domain.User;
@@ -40,6 +41,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -277,6 +279,13 @@ class ApprenticeApplicationTests {
 //        测试查询文档-----{"fragment":true,"hits":[{"fields":{},"fragment":false,"highlightFields":{},"id":"1","matchedQueries":[],"primaryTerm":0,"rawSortValues":[],"score":1.8413742,"seqNo":-2,"sortValues":[],"sourceAsMap":{"name":"cyx1","age":5},"sourceAsString":"{\"age\":5,\"name\":\"cyx1\"}","sourceRef":{"fragment":true},"type":"_doc","version":-1}],"maxScore":1.8413742,"totalHits":{"relation":"EQUAL_TO","value":1}}
 //        =====================
 //        测试查询文档--遍历参数--{name=cyx1, age=5}
+    }
+
+    @Test
+    void jenkonstest() {
+        URI serverURI = new URI("http://localhost:8080/jenkins");
+        Jenkins jenkins = new Jenkins(serverURI,"admin","admin");
+
     }
 
 
