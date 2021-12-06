@@ -56,12 +56,12 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyMapper, Notify> impleme
         notify.setType(notifyType.getName());
         String value = notifyType.getValue();
         notify.setNotifyTitle(value + "通知");
-        String blogText = blog.getBlogText();
+        String blogTitle = blog.getBlogTitle();
         String show;
-        if (blogText.length() > 10) {
-            show = blogText.substring(0, 10) + "...";
+        if (blogTitle.length() > 10) {
+            show = blogTitle.substring(0, 10) + "...";
         } else {
-            show = blogText;
+            show = blogTitle;
         }
         notify.setNotifyValue(userInfo.getUsername() + value + "了您的" +
                 show);
