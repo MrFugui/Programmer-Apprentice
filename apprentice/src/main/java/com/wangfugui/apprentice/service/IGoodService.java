@@ -1,8 +1,7 @@
 package com.wangfugui.apprentice.service;
 
-import com.wangfugui.apprentice.common.util.ResponseUtils;
-import com.wangfugui.apprentice.dao.domain.Good;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wangfugui.apprentice.dao.domain.Good;
 
 /**
  * <p>
@@ -14,11 +13,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IGoodService extends IService<Good> {
 
-    /** 点赞功能
-     * @Param: [good]
-     * @return: com.wangfugui.apprentice.common.util.ResponseUtils
-     * @Author: MaSiyi
-     * @Date: 2021/12/6
-     */
-    ResponseUtils good(Good good);
 }

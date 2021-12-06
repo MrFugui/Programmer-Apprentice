@@ -2,7 +2,6 @@ package com.wangfugui.apprentice.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangfugui.apprentice.common.constant.NotifyConstant;
-import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.Good;
 import com.wangfugui.apprentice.dao.mapper.GoodMapper;
 import com.wangfugui.apprentice.service.IBlogService;
@@ -46,7 +45,7 @@ public class GoodServiceImpl extends ServiceImpl<GoodMapper, Good> implements IG
      * @Date: 2021/12/6
      */
     @Override
-    public ResponseUtils good(Good good) {
+    public boolean save(Good good) {
         //博客id
         int blogId = good.getBlogId();
         //动态id
@@ -64,7 +63,7 @@ public class GoodServiceImpl extends ServiceImpl<GoodMapper, Good> implements IG
             good.setCreateUser(userService.getUserInfo().getId());
         }
 
-        return ResponseUtils.success(save(good));
+        return super.save(good);
     }
 
 }
