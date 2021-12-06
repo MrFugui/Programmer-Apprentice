@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-/** 核心公共controller类
+/**
+ * 核心公共controller类
+ *
  * @Param:
  * @return:
  * @Author: MaSiyi
@@ -30,8 +32,10 @@ public class BaseController<S extends IService<E>, E> {
     @ApiOperation("增")
     @PostMapping("/insert")
     public ResponseUtils insert(@RequestBody E entity) {
-        baseService.save(entity);
-        return ResponseUtils.success("添加成功");
+        if (baseService.save(entity)) {
+            return ResponseUtils.success("添加成功");
+        }
+        return ResponseUtils.msg("添加失败");
     }
 
     @ApiOperation("删")
