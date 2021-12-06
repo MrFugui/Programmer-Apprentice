@@ -1,10 +1,8 @@
-package com.wangfugui.apprentice.dao.domain;
+package com.wangfugui.apprentice.dao.dto;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 
@@ -16,14 +14,12 @@ import java.io.Serializable;
  * @author MrFugui
  * @since 2021-12-04
  */
-@TableName("user_extend")
 @ApiModel(value = "UserExtend对象", description = "用户信息拓展表")
 @Data
-public class UserExtend implements Serializable {
+public class UserExtendDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
     private Integer id;
 
     @ApiModelProperty("用户id")

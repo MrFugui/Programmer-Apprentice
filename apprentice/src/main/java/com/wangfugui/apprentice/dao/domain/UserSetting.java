@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
  */
 @TableName("user_setting")
 @ApiModel(value = "UserSetting对象", description = "用户设置表")
+@Data
 public class UserSetting implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,7 +48,7 @@ public class UserSetting implements Serializable {
     private LocalDateTime updateTime;
 
     @ApiModelProperty("设置模块")
-    private Integer settingGroup;
+    private String settingGroup;
 
 
 
