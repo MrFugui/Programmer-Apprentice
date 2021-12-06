@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
  * @since 2021-11-23
  */
 @ApiModel(value = "Good对象", description = "点赞表")
+@Data
 public class Good implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,45 +40,5 @@ public class Good implements Serializable {
     private Integer createUser;
 
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getDynamicId() {
-        return dynamicId;
-    }
-
-    public void setDynamicId(Integer dynamicId) {
-        this.dynamicId = dynamicId;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public Integer getCreateUser() {
-        return createUser;
-    }
-
-    public void setCreateUser(Integer createUser) {
-        this.createUser = createUser;
-    }
-
-    @Override
-    public String toString() {
-        return "Good{" +
-        "id=" + id +
-        ", dynamicId=" + dynamicId +
-        ", createTime=" + createTime +
-        ", createUser=" + createUser +
-        "}";
-    }
 }
