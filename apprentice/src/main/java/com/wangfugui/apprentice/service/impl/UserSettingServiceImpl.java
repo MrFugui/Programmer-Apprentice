@@ -1,10 +1,13 @@
 package com.wangfugui.apprentice.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wangfugui.apprentice.common.constant.UserSettingConstant;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.User;
 import com.wangfugui.apprentice.dao.domain.UserExtend;
 import com.wangfugui.apprentice.dao.domain.UserSetting;
+import com.wangfugui.apprentice.dao.dto.ApprenticeSettingDto;
+import com.wangfugui.apprentice.dao.dto.ApprenticeSettingExtendDto;
 import com.wangfugui.apprentice.dao.dto.NotifyUserSettingDto;
 import com.wangfugui.apprentice.dao.dto.UserExtendDto;
 import com.wangfugui.apprentice.dao.mapper.UserSettingMapper;
@@ -74,21 +77,69 @@ public class UserSettingServiceImpl extends ServiceImpl<UserSettingMapper, UserS
             userSetting = new UserSetting();
             userSetting.setUserId(userInfo.getId());
             Field declaredField = declaredFields[i];
+            //反射获取方法名
             String settingKey = declaredField.getName();
             userSetting.setSettingKey(settingKey);
             try {
                 declaredField.setAccessible(true);
+                //反射获取方法值
                 userSetting.setSettingValue(String.valueOf(declaredField.get(notifyUserSettingDto)));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
             userSetting.setCreateTime(LocalDateTime.now());
             userSetting.setUpdateTime(LocalDateTime.now());
-            userSetting.setSettingGroup("NotifyUserSetting");
+            userSetting.setSettingGroup(UserSettingConstant.NOTIFYUSERSETTING);
             userSettings.add(userSetting);
         }
         this.saveBatch(userSettings);
 
+
+        return ResponseUtils.success();
+    }
+
+    /**
+     * 拜师收徒设置
+     *
+     * @param apprenticeSettingDto
+     * @Param: [apprenticeSettingDto]
+     * @return: com.wangfugui.apprentice.common.util.ResponseUtils
+     * @Author: MaSiyi
+     * @Date: 2021/12/6
+     */
+    @Override
+    public ResponseUtils apprenticeSetting(ApprenticeSettingDto apprenticeSettingDto) {
+        ArrayList<UserSetting> list = new ArrayList<>();
+        //获取当前用户信息
+        User userInfo = userService.getUserInfo();
+        UserSetting setting = new UserSetting();
+        setting.setUserId(userInfo.getId());
+        setting.setSettingKey(UserSettingConstant.APPRENTICEVALUE);
+        setting.setSettingValue(apprenticeSettingDto.getApprenticeValue());
+        setting.setCreateTime(LocalDateTime.now());
+        setting.setUpdateTime(LocalDateTime.now());
+        setting.setSettingGroup(UserSettingConstant.APPRENTICEVALUE);
+        list.add(setting);
+
+        ApprenticeSettingExtendDto apprenticeSettingExtendDto = apprenticeSettingDto.getApprenticeSettingExtendDto();
+        Field[] declaredFields = apprenticeSettingExtendDto.getClass().getDeclaredFields();
+        for (Field declaredField : declaredFields) {
+
+            UserSetting userSetting = new UserSetting();
+            userSetting.setUserId(userInfo.getId());
+            userSetting.setSettingKey(declaredField.getName());
+            try {
+                declaredField.setAccessible(true);
+                userSetting.setSettingValue(String.valueOf(declaredField.get(apprenticeSettingExtendDto)));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            userSetting.setCreateTime(LocalDateTime.now());
+            userSetting.setUpdateTime(LocalDateTime.now());
+            userSetting.setSettingGroup(UserSettingConstant.APPRENTICESETTING);
+            list.add(userSetting);
+        }
+        this.saveBatch(list);
 
         return ResponseUtils.success();
     }

@@ -3,6 +3,7 @@ package com.wangfugui.apprentice.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.UserSetting;
+import com.wangfugui.apprentice.dao.dto.ApprenticeSettingDto;
 import com.wangfugui.apprentice.dao.dto.NotifyUserSettingDto;
 import com.wangfugui.apprentice.dao.dto.UserExtendDto;
 
@@ -32,4 +33,11 @@ public interface IUserSettingService extends IService<UserSetting> {
      */
     ResponseUtils notifyUserSetting(NotifyUserSettingDto notifyUserSettingDto);
 
+    /** 拜师收徒设置
+     * @Param: [apprenticeSettingDto]
+     * @return: com.wangfugui.apprentice.common.util.ResponseUtils
+     * @Author: MaSiyi
+     * @Date: 2021/12/6
+     */
+    ResponseUtils apprenticeSetting(ApprenticeSettingDto apprenticeSettingDto);
 }
