@@ -5,6 +5,7 @@ import com.wangfugui.apprentice.dao.domain.Blog;
 import com.wangfugui.apprentice.dao.domain.Dynamic;
 import com.wangfugui.apprentice.dao.domain.Notify;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wangfugui.apprentice.dao.domain.Text;
 
 /**
  * <p>
@@ -34,4 +35,6 @@ public interface INotifyService extends IService<Notify> {
      * @Date: 2021/12/6
      */
     Boolean addDynamicNotify(Dynamic dynamic, NotifyConstant.NotifyType notifyType);
+
+    Boolean checkChoose(Text entity);
 }

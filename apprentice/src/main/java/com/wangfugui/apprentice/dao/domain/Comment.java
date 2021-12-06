@@ -19,19 +19,13 @@ import java.time.LocalDateTime;
  */
 @Data
 @ApiModel(value = "Comment对象", description = "评论表")
-public class Comment implements Serializable {
+public class Comment extends Text implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("id")
-      @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-
-    @ApiModelProperty("动态id")
-    private Integer dynamicId;
-
-    @ApiModelProperty("博客id")
-    private Integer blogId;
 
     @ApiModelProperty("评论内容")
     private String commentText;

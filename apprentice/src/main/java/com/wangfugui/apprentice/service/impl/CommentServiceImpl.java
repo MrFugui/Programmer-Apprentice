@@ -2,7 +2,6 @@ package com.wangfugui.apprentice.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangfugui.apprentice.common.constant.NotifyConstant;
-import com.wangfugui.apprentice.common.exception.ApprenticeException;
 import com.wangfugui.apprentice.dao.domain.Comment;
 import com.wangfugui.apprentice.dao.domain.User;
 import com.wangfugui.apprentice.dao.mapper.CommentMapper;
@@ -40,29 +39,21 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     public boolean save(Comment entity) {
         User userInfo = userService.getUserInfo();
 
-        //博客id
-        int blogId = entity.getBlogId() == null ? 0 : entity.getBlogId();
-        //动态id
-        int dynamicId = entity.getDynamicId() == null ? 0 : entity.getDynamicId();
-        //两个都没选
-        if (blogId == 0 && dynamicId == 0) {
-            throw new ApprenticeException("请选择博客或者动态");
-        }
-        //两个都选了
-        if (blogId != 0 && dynamicId != 0) {
-            throw new ApprenticeException("请选择一个博客或者动态");
-        }
+        boolean aBoolean = notifyService.checkChoose(entity);
+        if (aBoolean) {
 
-        entity.setCreateTime(LocalDateTime.now());
-        Integer userId = userInfo.getId();
-        entity.setCreateUser(userId);
-
-        if (blogId != 0) {
-            //发送通知
-            notifyService.addBlogNotify(blogService.getById(blogId), NotifyConstant.NotifyType.COMMENT);
-        } else {
-            //发送通知
-            notifyService.addDynamicNotify(dynamicService.getById(blogId), NotifyConstant.NotifyType.COMMENT);
+            entity.setCreateTime(LocalDateTime.now());
+            Integer userId = userInfo.getId();
+            entity.setCreateUser(userId);
+            int blogId = entity.getBlogId();
+            int dynamicId = entity.getDynamicId();
+            if (blogId != 0) {
+                //发送通知
+                notifyService.addBlogNotify(blogService.getById(blogId), NotifyConstant.NotifyType.COMMENT);
+            } else {
+                //发送通知
+                notifyService.addDynamicNotify(dynamicService.getById(dynamicId), NotifyConstant.NotifyType.COMMENT);
+            }
         }
         return super.save(entity);
     }

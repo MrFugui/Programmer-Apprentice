@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
  */
 @ApiModel(value = "Good对象", description = "点赞表")
 @Data
-public class Good implements Serializable {
+public class Good extends Text implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,17 +27,14 @@ public class Good implements Serializable {
       @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty("动态表id")
-    private Integer dynamicId;
-
-    @ApiModelProperty("博客id")
-    private Integer blogId;
-
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
 
     @ApiModelProperty("创建用户")
     private Integer createUser;
+
+
+
 
 
 

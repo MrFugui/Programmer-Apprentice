@@ -6,6 +6,7 @@ import com.wangfugui.apprentice.common.exception.ApprenticeException;
 import com.wangfugui.apprentice.dao.domain.Blog;
 import com.wangfugui.apprentice.dao.domain.Dynamic;
 import com.wangfugui.apprentice.dao.domain.Notify;
+import com.wangfugui.apprentice.dao.domain.Text;
 import com.wangfugui.apprentice.dao.domain.User;
 import com.wangfugui.apprentice.dao.mapper.NotifyMapper;
 import com.wangfugui.apprentice.service.IBlogService;
@@ -109,5 +110,23 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyMapper, Notify> impleme
         notify.setNotifyStatus(NotifyConstant.NotifyStatus.Read.getName());
 
         return this.save(notify);
+    }
+
+    @Override
+    public  Boolean checkChoose(Text entity) {
+
+        //博客id
+        int blogId = entity.getBlogId() == null ? 0 : entity.getBlogId();
+        //动态id
+        int dynamicId = entity.getDynamicId() == null ? 0 : entity.getDynamicId();
+        //两个都没选
+        if (blogId == 0 && dynamicId == 0) {
+            throw new ApprenticeException("请选择博客或者动态");
+        }
+        //两个都选了
+        if (blogId != 0 && dynamicId != 0) {
+            throw new ApprenticeException("请选择一个博客或者动态");
+        }
+        return true;
     }
 }
