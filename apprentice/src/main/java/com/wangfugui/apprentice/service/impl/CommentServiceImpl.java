@@ -3,10 +3,7 @@ package com.wangfugui.apprentice.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangfugui.apprentice.common.constant.NotifyConstant;
 import com.wangfugui.apprentice.common.exception.ApprenticeException;
-import com.wangfugui.apprentice.dao.domain.Blog;
 import com.wangfugui.apprentice.dao.domain.Comment;
-import com.wangfugui.apprentice.dao.domain.Dynamic;
-import com.wangfugui.apprentice.dao.domain.Notify;
 import com.wangfugui.apprentice.dao.domain.User;
 import com.wangfugui.apprentice.dao.mapper.CommentMapper;
 import com.wangfugui.apprentice.service.IBlogService;
@@ -60,39 +57,13 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         Integer userId = userInfo.getId();
         entity.setCreateUser(userId);
 
-        //发送通知
-        Notify notify = new Notify();
-        notify.setType(NotifyConstant.NotifyType.COMMENT.getName());
-        String value = NotifyConstant.NotifyType.COMMENT.getValue();
-        notify.setNotifyTitle(value + "通知");
-        Blog blog;
-        Dynamic dynamic;
-        int toUserId;
         if (blogId != 0) {
-            blog = blogService.getById(blogId);
-            notify.setNotifyValue(userInfo.getUsername() + value + "了您的" +
-                    blog.getBlogTitle());
-            toUserId = blog.getCreateUser();
+            //发送通知
+            notifyService.addBlogNotify(blogService.getById(blogId), NotifyConstant.NotifyType.COMMENT);
         } else {
-            dynamic = dynamicService.getById(dynamicId);
-
-            String dynamicText = dynamic.getDynamicText();
-            String show;
-            if (dynamicText.length() > 10) {
-                show = dynamicText.substring(0, 10) + "...";
-            } else {
-                show = dynamicText;
-            }
-            notify.setNotifyValue(userInfo.getUsername() + value + "了您的" + show);
-            toUserId = dynamic.getCreateUser();
+            //发送通知
+            notifyService.addDynamicNotify(dynamicService.getById(blogId), NotifyConstant.NotifyType.COMMENT);
         }
-        notify.setUserId(userId);
-        notify.setCreateTime(LocalDateTime.now());
-        notify.setTouserId(toUserId);
-        notify.setNotifyStatus(NotifyConstant.NotifyStatus.Read.getName());
-
-
-        notifyService.save(notify);
         return super.save(entity);
     }
 }
