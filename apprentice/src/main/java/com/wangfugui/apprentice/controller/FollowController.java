@@ -1,9 +1,10 @@
 package com.wangfugui.apprentice.controller;
 
 
+import com.wangfugui.apprentice.dao.domain.Follow;
+import com.wangfugui.apprentice.service.IFollowService;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
@@ -13,9 +14,9 @@ import org.springframework.stereotype.Controller;
  * @author MrFugui
  * @since 2021-12-08
  */
-@Controller
+@RestController
 @RequestMapping("/apprentice/follow")
-public class FollowController {
+public class FollowController extends BaseController<IFollowService, Follow>{
 
 }
 

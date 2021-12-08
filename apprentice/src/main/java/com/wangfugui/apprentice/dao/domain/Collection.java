@@ -31,7 +31,7 @@ public class Collection implements Serializable {
     private Integer blogId;
 
     @ApiModelProperty("收藏人")
-    private String createUser;
+    private Integer createUser;
 
     @ApiModelProperty("收藏时间")
     private LocalDateTime createTime;

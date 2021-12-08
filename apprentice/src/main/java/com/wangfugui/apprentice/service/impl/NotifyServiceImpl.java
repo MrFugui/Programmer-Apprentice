@@ -5,6 +5,7 @@ import com.wangfugui.apprentice.common.constant.NotifyConstant;
 import com.wangfugui.apprentice.common.exception.ApprenticeException;
 import com.wangfugui.apprentice.dao.domain.Blog;
 import com.wangfugui.apprentice.dao.domain.Dynamic;
+import com.wangfugui.apprentice.dao.domain.Follow;
 import com.wangfugui.apprentice.dao.domain.Notify;
 import com.wangfugui.apprentice.dao.domain.Text;
 import com.wangfugui.apprentice.dao.domain.User;
@@ -70,7 +71,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyMapper, Notify> impleme
         notify.setUserId(userInfo.getId());
         notify.setCreateTime(LocalDateTime.now());
         notify.setTouserId(toUserId);
-        notify.setNotifyStatus(NotifyConstant.NotifyStatus.Read.getName());
+        notify.setNotifyStatus(NotifyConstant.NotifyStatus.NOREAD.getName());
 
         return this.save(notify);
     }
@@ -107,7 +108,7 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyMapper, Notify> impleme
         notify.setUserId(userInfo.getId());
         notify.setCreateTime(LocalDateTime.now());
         notify.setTouserId(toUserId);
-        notify.setNotifyStatus(NotifyConstant.NotifyStatus.Read.getName());
+        notify.setNotifyStatus(NotifyConstant.NotifyStatus.NOREAD.getName());
 
         return this.save(notify);
     }
@@ -128,5 +129,35 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyMapper, Notify> impleme
             throw new ApprenticeException("请选择一个博客或者动态");
         }
         return true;
+    }
+
+    /**
+     * 添加关注通知
+     *
+     * @param follow
+     * @Param: [follow]
+     * @return: java.lang.Boolean
+     * @Author: MaSiyi
+     * @Date: 2021/12/8
+     */
+    @Override
+    public Boolean addFollowNotify(Follow follow,NotifyConstant.NotifyType notifyType) {
+
+
+        Notify notify = new Notify();
+        notify.setUserId(0);
+        notify.setCreateTime(LocalDateTime.now());
+
+        notify.setNotifyStatus(0);
+
+        notify.setType(notifyType.getName());
+        String value = notifyType.getValue();
+        notify.setNotifyTitle(value + "通知");
+        notify.setNotifyValue(follow.getCreateUserName()+"关注了您");
+
+        notify.setTouserId(follow.getFollowUser());
+        notify.setNotifyStatus(NotifyConstant.NotifyStatus.NOREAD.getName());
+
+        return super.save(notify);
     }
 }

@@ -3,6 +3,7 @@ package com.wangfugui.apprentice.service;
 import com.wangfugui.apprentice.common.constant.NotifyConstant;
 import com.wangfugui.apprentice.dao.domain.Blog;
 import com.wangfugui.apprentice.dao.domain.Dynamic;
+import com.wangfugui.apprentice.dao.domain.Follow;
 import com.wangfugui.apprentice.dao.domain.Notify;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wangfugui.apprentice.dao.domain.Text;
@@ -36,5 +37,20 @@ public interface INotifyService extends IService<Notify> {
      */
     Boolean addDynamicNotify(Dynamic dynamic, NotifyConstant.NotifyType notifyType);
 
+    /** 检查输入
+     * @Param: [entity]
+     * @return: java.lang.Boolean
+     * @Author: MaSiyi
+     * @Date: 2021/12/6
+     */
     Boolean checkChoose(Text entity);
+
+
+    /** 添加关注通知
+     * @Param: [follow]
+     * @return: java.lang.Boolean
+     * @Author: MaSiyi
+     * @Date: 2021/12/8
+     */
+    Boolean addFollowNotify(Follow follow,NotifyConstant.NotifyType notifyType);
 }

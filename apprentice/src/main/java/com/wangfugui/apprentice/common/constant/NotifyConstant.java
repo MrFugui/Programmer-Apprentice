@@ -46,8 +46,8 @@ public interface NotifyConstant {
      *
      */
     enum NotifyStatus{
-        Read(0, "未读"),
-        Noread(1, "已读");
+        NOREAD(0, "未读"),
+        READ(1, "已读");
 
         Integer name;
         String value;
