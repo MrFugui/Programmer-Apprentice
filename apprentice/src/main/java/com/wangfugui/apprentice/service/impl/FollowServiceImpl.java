@@ -1,7 +1,9 @@
 package com.wangfugui.apprentice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangfugui.apprentice.common.constant.NotifyConstant;
+import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.Follow;
 import com.wangfugui.apprentice.dao.domain.User;
 import com.wangfugui.apprentice.dao.mapper.FollowMapper;
@@ -29,6 +31,8 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> impleme
     private INotifyService notifyService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private FollowMapper followMapper;
 
     @Override
     public boolean save(Follow entity) {
@@ -40,5 +44,38 @@ public class FollowServiceImpl extends ServiceImpl<FollowMapper, Follow> impleme
         //添加关注通知
         notifyService.addFollowNotify(entity, NotifyConstant.NotifyType.FOLLOW);
         return super.save(entity);
+    }
+
+    /**
+     * 关注列表
+     *
+     * @Param: []
+     * @return: com.wangfugui.apprentice.common.util.ResponseUtils
+     * @Author: MaSiyi
+     * @Date: 2021/12/8
+     */
+    @Override
+    public ResponseUtils listFollowing() {
+        User userInfo = userService.getUserInfo();
+
+        QueryWrapper<Follow> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.lambda().eq(Follow::getCreateUser, userInfo.getId());
+        return ResponseUtils.success(followMapper.selectList(userQueryWrapper));
+    }
+
+    /**
+     * 粉丝列表
+     *
+     * @Param: []
+     * @return: com.wangfugui.apprentice.common.util.ResponseUtils
+     * @Author: MaSiyi
+     * @Date: 2021/12/8
+     */
+    @Override
+    public ResponseUtils listFollowers() {
+        User userInfo = userService.getUserInfo();
+        QueryWrapper<Follow> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.lambda().eq(Follow::getFollowUser, userInfo.getId());
+        return ResponseUtils.success(followMapper.selectList(userQueryWrapper));
     }
 }

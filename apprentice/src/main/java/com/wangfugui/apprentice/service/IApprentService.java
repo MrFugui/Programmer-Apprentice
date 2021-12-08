@@ -21,7 +21,7 @@ public interface IApprentService extends IService<Apprent> {
      * @Author: MaSiyi
      * @Date: 2021/11/30
      */
-    ResponseUtils listMaster(String userId);
+    ResponseUtils listMaster();
 
     /** 徒弟列表
      * @Param: [userId]
@@ -29,5 +29,5 @@ public interface IApprentService extends IService<Apprent> {
      * @Author: MaSiyi
      * @Date: 2021/11/30
      */
-    ResponseUtils listApprentice(String userId);
+    ResponseUtils listApprentice();
 }

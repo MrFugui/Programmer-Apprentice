@@ -3,6 +3,7 @@ package com.wangfugui.apprentice.controller;
 
 import com.wangfugui.apprentice.dao.domain.Collection;
 import com.wangfugui.apprentice.service.ICollectionService;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/apprentice/collection")
+@Api(tags = "收藏功能")
 public class CollectionController extends BaseController<ICollectionService, Collection>{
 
 }

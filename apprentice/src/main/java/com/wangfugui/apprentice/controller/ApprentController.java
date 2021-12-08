@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,14 +29,14 @@ public class ApprentController {
 
     @GetMapping("/listMaster")
     @ApiOperation("师傅列表")
-    public ResponseUtils listMaster(@RequestParam String userId) {
-        return apprentService.listMaster(userId);
+    public ResponseUtils listMaster() {
+        return apprentService.listMaster();
     }
 
     @GetMapping("/listApprentice")
     @ApiOperation("徒弟列表")
-    public ResponseUtils listApprentice(@RequestParam String userId) {
-        return apprentService.listApprentice(userId);
+    public ResponseUtils listApprentice() {
+        return apprentService.listApprentice();
     }
 }
 
