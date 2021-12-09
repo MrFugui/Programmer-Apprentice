@@ -11,11 +11,29 @@
  Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 27/11/2021 09:42:33
+ Date: 08/12/2021 11:20:43
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for apprent
+-- ----------------------------
+DROP TABLE IF EXISTS `apprent`;
+CREATE TABLE `apprent`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '用户id',
+  `user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名称',
+  `parent_id` int(11) NULL DEFAULT NULL COMMENT '师父用户id',
+  `parent_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '师父名称',
+  `parent_level` int(10) NULL DEFAULT NULL COMMENT '师父等级',
+  `apprent_time` datetime(0) NULL DEFAULT NULL COMMENT '拜师时间',
+  `apprent_status` int(10) NULL DEFAULT NULL COMMENT '师徒关系状态',
+  `dismiss_time` datetime(0) NULL DEFAULT NULL COMMENT '解除关系时间',
+  `finish_time` datetime(0) NULL DEFAULT NULL COMMENT '出师时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '师徒表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for blog
@@ -43,7 +61,7 @@ CREATE TABLE `blog`  (
 -- ----------------------------
 -- Records of blog
 -- ----------------------------
-INSERT INTO `blog` VALUES (1, 'string', 'string', 0, 1, 7, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (1, 'string撒打发斯蒂芬水电费是', 'string', 0, 1, 7, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
 INSERT INTO `blog` VALUES (2, 'string', 'string', 0, 2, 6, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
 INSERT INTO `blog` VALUES (3, 'string', 'string', 0, 3, 5, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
 INSERT INTO `blog` VALUES (4, 'string', 'string', 0, 4, 4, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
@@ -54,6 +72,20 @@ INSERT INTO `blog` VALUES (8, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL,
 INSERT INTO `blog` VALUES (9, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `blog` VALUES (10, 'string', 'string', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 0, 0, 0, 0, 'string', NULL);
 INSERT INTO `blog` VALUES (11, 'string', 'string', 0, 0, 0, '2021-11-27 01:13:02', 0, 0, 0, 0, 0, 0, 'string', 'WJ4MX30B9JvC1FeAomZQ');
+
+-- ----------------------------
+-- Table structure for collection
+-- ----------------------------
+DROP TABLE IF EXISTS `collection`;
+CREATE TABLE `collection`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `blog_id` int(11) NULL DEFAULT NULL COMMENT '博客id',
+  `create_user` int(11) NULL DEFAULT NULL COMMENT '收藏人',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '收藏时间',
+  `blog_auth_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '博客作者id(userId)',
+  `blog_auth_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '博客作者名称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '收藏表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for comment
@@ -67,11 +99,29 @@ CREATE TABLE `comment`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `create_user` int(11) NULL DEFAULT NULL COMMENT '创建人',
   `good_number` int(11) NULL DEFAULT NULL COMMENT '点赞数量',
-  `delete_flag` tinyblob NULL COMMENT '是否删除',
+  `delete_flag` tinyint(1) NULL DEFAULT NULL COMMENT '是否删除',
   `talk_number` int(11) NULL DEFAULT NULL COMMENT '评论数量',
   `comment_id` int(11) NULL DEFAULT NULL COMMENT '评论表父id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of comment
+-- ----------------------------
+INSERT INTO `comment` VALUES (1, NULL, 1, 'string', '2021-12-06 11:29:31', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (2, 0, 1, 'string', '2021-12-06 11:31:46', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (3, NULL, 1, 'string', '2021-12-06 11:38:24', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (4, 0, 1, 'string', '2021-12-06 11:38:30', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (5, 1, NULL, 'string', '2021-12-06 11:41:52', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (6, 0, 1, 'string', '2021-12-06 11:42:28', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (7, 0, 1, 'string', '2021-12-06 11:58:35', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (8, 0, 1, 'string', '2021-12-06 15:05:12', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (9, 1, NULL, 'string', '2021-12-06 15:08:11', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (10, 1, NULL, 'string', '2021-12-06 15:14:14', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (11, 1, NULL, 'string', '2021-12-06 15:14:46', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (12, 1, NULL, 'string', '2021-12-06 15:15:03', 5, 0, 0, 0, 1);
+INSERT INTO `comment` VALUES (13, 0, 1, 'string', '2021-12-06 15:17:05', 5, 0, 0, 0, 0);
+INSERT INTO `comment` VALUES (14, 1, 0, 'string', '2021-12-06 15:28:57', 5, 0, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for dynamic
@@ -93,9 +143,23 @@ CREATE TABLE `dynamic`  (
 -- ----------------------------
 -- Records of dynamic
 -- ----------------------------
-INSERT INTO `dynamic` VALUES (1, 'string', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 'string');
+INSERT INTO `dynamic` VALUES (1, 'string少时诵诗书', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 'string');
 INSERT INTO `dynamic` VALUES (2, 'string', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 'string');
 INSERT INTO `dynamic` VALUES (3, 'string', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 'string');
+
+-- ----------------------------
+-- Table structure for follow
+-- ----------------------------
+DROP TABLE IF EXISTS `follow`;
+CREATE TABLE `follow`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_user` int(11) NULL DEFAULT NULL COMMENT '关注人',
+  `create_user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '关注人名称',
+  `follow_user` int(11) NULL DEFAULT NULL COMMENT '被关注人',
+  `follow_user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '被关注人名称',
+  `follow_time` datetime(0) NULL DEFAULT NULL COMMENT '关注时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '关注表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for function
@@ -195,7 +259,59 @@ CREATE TABLE `good`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `create_user` int(11) NULL DEFAULT NULL COMMENT '创建用户',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '点赞表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '点赞表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of good
+-- ----------------------------
+INSERT INTO `good` VALUES (1, 0, NULL, '2021-12-06 09:45:31', 5);
+INSERT INTO `good` VALUES (2, 1, 0, '2021-12-06 15:29:34', 5);
+INSERT INTO `good` VALUES (3, 1, 0, '2021-12-06 15:43:48', 5);
+INSERT INTO `good` VALUES (4, 1, 0, '2021-12-06 15:43:53', 5);
+
+-- ----------------------------
+-- Table structure for notify
+-- ----------------------------
+DROP TABLE IF EXISTS `notify`;
+CREATE TABLE `notify`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知类型',
+  `notify_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知标题',
+  `notify_value` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '通知内容',
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '用户id',
+  `touser_id` int(11) NULL DEFAULT NULL COMMENT '发送至用户id',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '通知时间',
+  `read_time` datetime(0) NULL DEFAULT NULL COMMENT '查看时间',
+  `notify_status` int(11) NULL DEFAULT 0 COMMENT '通知状态1已读0未读',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '通知表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of notify
+-- ----------------------------
+INSERT INTO `notify` VALUES (1, 'comment', '评论通知', '123评论了您的string', 5, 0, '2021-12-06 11:29:56', NULL, 0);
+INSERT INTO `notify` VALUES (2, 'comment', '评论通知', '123评论了您的string', 5, 0, '2021-12-06 11:31:46', NULL, 0);
+INSERT INTO `notify` VALUES (3, 'comment', '评论通知', '123评论了您的string', 5, 0, '2021-12-06 11:38:24', NULL, 0);
+INSERT INTO `notify` VALUES (4, 'comment', '评论通知', '123评论了您的string', 5, 0, '2021-12-06 11:38:30', NULL, 0);
+INSERT INTO `notify` VALUES (5, 'comment', '评论通知', '123评论了您的string', 5, 0, '2021-12-06 11:41:52', NULL, 0);
+INSERT INTO `notify` VALUES (6, 'comment', '评论通知', '123评论了您的string', 5, 0, '2021-12-06 11:42:28', NULL, 0);
+INSERT INTO `notify` VALUES (7, 'comment', '评论通知', '123评论了您的string', 5, 0, '2021-12-06 11:58:35', NULL, 0);
+INSERT INTO `notify` VALUES (8, 'good', '点赞通知', '123点赞了您的string', 5, 0, '2021-12-06 14:46:39', NULL, 0);
+INSERT INTO `notify` VALUES (9, 'good', '点赞通知', '123点赞了您的string', 5, 0, '2021-12-06 14:47:04', NULL, 0);
+INSERT INTO `notify` VALUES (10, 'good', '点赞通知', '123点赞了您的string', 5, 0, '2021-12-06 14:47:26', NULL, 0);
+INSERT INTO `notify` VALUES (11, 'good', '点赞通知', '123点赞了您的string', 5, 0, '2021-12-06 14:48:07', NULL, 0);
+INSERT INTO `notify` VALUES (12, 'good', '点赞通知', '123点赞了您的string撒打发斯...', 5, 0, '2021-12-06 14:48:41', NULL, 0);
+INSERT INTO `notify` VALUES (13, 'good', '点赞通知', '123点赞了您的string撒打发斯...', 5, 0, '2021-12-06 15:02:40', NULL, 0);
+INSERT INTO `notify` VALUES (14, 'comment', '评论通知', '123评论了您的string撒打发斯...', 5, 0, '2021-12-06 15:05:12', NULL, 0);
+INSERT INTO `notify` VALUES (15, 'comment', '评论通知', '123评论了您的string', 5, 0, '2021-12-06 15:08:11', NULL, 0);
+INSERT INTO `notify` VALUES (16, 'comment', '评论通知', '123评论了您的string', 5, 0, '2021-12-06 15:14:14', NULL, 0);
+INSERT INTO `notify` VALUES (17, 'comment', '评论通知', '123评论了您的string少时诵诗...', 5, 0, '2021-12-06 15:14:46', NULL, 0);
+INSERT INTO `notify` VALUES (18, 'comment', '评论通知', '123评论了您的string少时诵诗...', 5, 0, '2021-12-06 15:15:03', NULL, 0);
+INSERT INTO `notify` VALUES (19, 'comment', '评论通知', '123评论了您的string撒打发斯...', 5, 0, '2021-12-06 15:17:05', NULL, 0);
+INSERT INTO `notify` VALUES (20, 'comment', '评论通知', '123评论了您的string少时诵诗...', 5, 0, '2021-12-06 15:28:57', NULL, 0);
+INSERT INTO `notify` VALUES (21, 'good', '点赞通知', '123点赞了您的string撒打发斯...', 5, 0, '2021-12-06 15:29:34', NULL, 0);
+INSERT INTO `notify` VALUES (22, 'good', '点赞通知', '123点赞了您的string撒打发斯...', 5, 0, '2021-12-06 15:43:47', NULL, 0);
+INSERT INTO `notify` VALUES (23, 'good', '点赞通知', '123点赞了您的string撒打发斯...', 5, 0, '2021-12-06 15:43:53', NULL, 0);
 
 -- ----------------------------
 -- Table structure for role
@@ -216,6 +332,26 @@ INSERT INTO `role` VALUES (1, 'admin', NULL, NULL);
 INSERT INTO `role` VALUES (2, 'test', NULL, NULL);
 
 -- ----------------------------
+-- Table structure for system_config
+-- ----------------------------
+DROP TABLE IF EXISTS `system_config`;
+CREATE TABLE `system_config`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'key',
+  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'value',
+  `group` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组别',
+  `status` tinyint(1) NULL DEFAULT 0 COMMENT '状态0开启1关闭',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统配置表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of system_config
+-- ----------------------------
+INSERT INTO `system_config` VALUES (14, 'mapperDir', 'E:\\msyWorkspace\\Programmer-Apprentice\\apprentice\\src\\main\\resources\\mapper', NULL, 1, NULL, NULL);
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -232,19 +368,18 @@ CREATE TABLE `user`  (
   `del_flag` int(11) NULL DEFAULT 0 COMMENT '0 存在，1 删除',
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0),
-  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, NULL, 'fugui', '123', 2, NULL, 1, NULL, NULL, 0, NULL, '2021-10-25 10:44:35', NULL);
-INSERT INTO `user` VALUES (2, NULL, 'admin', '123', 1, NULL, 1, NULL, NULL, 0, NULL, '2021-10-23 15:53:43', NULL);
-INSERT INTO `user` VALUES (4, NULL, 'wangfugui', '$2a$10$gpq7aq5CM0JijheXM7M53.SaM/5t6JZFa9oTH3HfMIJ3fgT4BWTYO', 1, NULL, 1, NULL, NULL, 0, NULL, '2021-10-25 10:44:40', NULL);
-INSERT INTO `user` VALUES (5, NULL, '123', '$2a$10$guUqq8QDoSqT6tuYjLAJBetAPWFJSL4QBVmnrUAT.T42AmEpiG3.q', 2, NULL, 1, NULL, NULL, 0, NULL, '2021-10-30 11:48:32', NULL);
-INSERT INTO `user` VALUES (7, NULL, 'masiyi', '$2a$10$jo4bwvJS5pRYbn7Zqv7YD.sAbOBn.SY2i8ZiIZXptnyHMT60Vorfy', NULL, NULL, 1, NULL, NULL, 0, NULL, '2021-11-08 10:42:50', NULL);
-INSERT INTO `user` VALUES (8, 'string', 'string', '$2a$10$IT.A7pXA1Mxy63zf07qscu8lf.g4jLJOSWnTBvNDiM0.OGnEZoHmu', 0, 'string', 0, NULL, 'string', 0, NULL, '2021-11-22 16:38:58', 'string');
+INSERT INTO `user` VALUES (1, NULL, 'fugui', '123', 2, NULL, 1, NULL, NULL, 0, NULL, '2021-10-25 10:44:35');
+INSERT INTO `user` VALUES (2, NULL, 'admin', '123', 1, NULL, 1, NULL, NULL, 0, NULL, '2021-10-23 15:53:43');
+INSERT INTO `user` VALUES (4, NULL, 'wangfugui', '$2a$10$gpq7aq5CM0JijheXM7M53.SaM/5t6JZFa9oTH3HfMIJ3fgT4BWTYO', 1, NULL, 1, NULL, NULL, 0, NULL, '2021-10-25 10:44:40');
+INSERT INTO `user` VALUES (5, NULL, '123', '$2a$10$guUqq8QDoSqT6tuYjLAJBetAPWFJSL4QBVmnrUAT.T42AmEpiG3.q', 2, NULL, 1, NULL, NULL, 0, NULL, '2021-10-30 11:48:32');
+INSERT INTO `user` VALUES (7, NULL, 'masiyi', '$2a$10$jo4bwvJS5pRYbn7Zqv7YD.sAbOBn.SY2i8ZiIZXptnyHMT60Vorfy', NULL, NULL, 1, NULL, NULL, 0, NULL, '2021-11-08 10:42:50');
+INSERT INTO `user` VALUES (8, 'string', 'string', '$2a$10$IT.A7pXA1Mxy63zf07qscu8lf.g4jLJOSWnTBvNDiM0.OGnEZoHmu', 0, 'string', 0, NULL, 'string', 0, NULL, '2021-11-22 16:38:58');
 
 -- ----------------------------
 -- Table structure for user_business
@@ -303,6 +438,54 @@ INSERT INTO `user_business` VALUES (57, 'UserCustomer', '121', '[56]', NULL, '0'
 INSERT INTO `user_business` VALUES (67, 'UserRole', '131', '[17]', NULL, '0');
 INSERT INTO `user_business` VALUES (68, 'RoleFunctions', '16', '[210]', NULL, '0');
 INSERT INTO `user_business` VALUES (69, 'RoleFunctions', '17', '[210][211][241][33][199][242][41][200][201][202][40][232][233][197][203][204][205][206][212]', '[{\"funId\":\"241\",\"btnStr\":\"1,2\"},{\"funId\":\"33\",\"btnStr\":\"1,2\"},{\"funId\":\"199\",\"btnStr\":\"1,2\"},{\"funId\":\"242\",\"btnStr\":\"1,2\"},{\"funId\":\"41\",\"btnStr\":\"1,2\"},{\"funId\":\"200\",\"btnStr\":\"1,2\"},{\"funId\":\"210\",\"btnStr\":\"1,2\"},{\"funId\":\"211\",\"btnStr\":\"1,2\"},{\"funId\":\"197\",\"btnStr\":\"1\"},{\"funId\":\"203\",\"btnStr\":\"1\"},{\"funId\":\"204\",\"btnStr\":\"1\"},{\"funId\":\"205\",\"btnStr\":\"1\"},{\"funId\":\"206\",\"btnStr\":\"1\"},{\"funId\":\"212\",\"btnStr\":\"1\"},{\"funId\":\"201\",\"btnStr\":\"1,2\"},{\"funId\":\"202\",\"btnStr\":\"1,2\"},{\"funId\":\"40\",\"btnStr\":\"1,2\"},{\"funId\":\"232\",\"btnStr\":\"1,2\"},{\"funId\":\"233\",\"btnStr\":\"1,2\"}]', '0');
+
+-- ----------------------------
+-- Table structure for user_extend
+-- ----------------------------
+DROP TABLE IF EXISTS `user_extend`;
+CREATE TABLE `user_extend`  (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '用户id',
+  `email_id` int(11) NULL DEFAULT NULL COMMENT '邮箱',
+  `nick_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '账号名称',
+  `phone` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号码',
+  `gender` tinyint(2) NULL DEFAULT NULL COMMENT '性别1男0女2不透露',
+  `flag` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标签',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户信息拓展表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for user_setting
+-- ----------------------------
+DROP TABLE IF EXISTS `user_setting`;
+CREATE TABLE `user_setting`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `user_id` int(11) NULL DEFAULT NULL COMMENT '用户信息',
+  `setting_key` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设置类型',
+  `setting_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设置值',
+  `system_config_id` int(11) NULL DEFAULT NULL COMMENT '系统配置表id-默认值',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `setting_group` varchar(55) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '设置模块',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户设置表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user_setting
+-- ----------------------------
+INSERT INTO `user_setting` VALUES (1, 5, 'applicationForApprenticeship', 'false', NULL, '2021-12-06 08:58:35', '2021-12-06 08:58:35', 'NotifyUserSetting');
+INSERT INTO `user_setting` VALUES (2, 5, 'apprenticeshipApplication', 'false', NULL, '2021-12-06 08:58:35', '2021-12-06 08:58:35', 'NotifyUserSetting');
+INSERT INTO `user_setting` VALUES (3, 5, 'privateMessageReception', 'false', NULL, '2021-12-06 08:58:35', '2021-12-06 08:58:35', 'NotifyUserSetting');
+INSERT INTO `user_setting` VALUES (4, 5, 'likeNotification', 'false', NULL, '2021-12-06 08:58:35', '2021-12-06 08:58:35', 'NotifyUserSetting');
+INSERT INTO `user_setting` VALUES (5, 5, 'commentNotification', 'false', NULL, '2021-12-06 08:58:35', '2021-12-06 08:58:35', 'NotifyUserSetting');
+INSERT INTO `user_setting` VALUES (6, 5, 'collectionNotice', 'false', NULL, '2021-12-06 08:58:35', '2021-12-06 08:58:35', 'NotifyUserSetting');
+INSERT INTO `user_setting` VALUES (7, 5, 'followNotifications', 'false', NULL, '2021-12-06 08:58:35', '2021-12-06 08:58:35', 'NotifyUserSetting');
+INSERT INTO `user_setting` VALUES (8, 5, 'apprenticeValue', 'string', NULL, '2021-12-06 09:17:25', '2021-12-06 09:17:25', 'ApprenticeSetting');
+INSERT INTO `user_setting` VALUES (9, 5, 'apprenticeValue', 'string', NULL, '2021-12-06 09:17:56', '2021-12-06 09:17:56', 'ApprenticeSetting');
+INSERT INTO `user_setting` VALUES (10, 5, 'ApprenticeValue', '师父', NULL, '2021-12-06 09:28:54', '2021-12-06 09:28:54', 'ApprenticeValue');
+INSERT INTO `user_setting` VALUES (11, 5, 'personalProfile', 'string', NULL, '2021-12-06 09:28:54', '2021-12-06 09:28:54', 'ApprenticeSetting');
+INSERT INTO `user_setting` VALUES (12, 5, 'label', 'string', NULL, '2021-12-06 09:28:54', '2021-12-06 09:28:54', 'ApprenticeSetting');
+INSERT INTO `user_setting` VALUES (13, 5, 'wantApprentice', 'string', NULL, '2021-12-06 09:28:54', '2021-12-06 09:28:54', 'ApprenticeSetting');
 
 -- ----------------------------
 -- Table structure for user_statistics
