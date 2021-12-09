@@ -39,6 +39,11 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyMapper, Notify> impleme
     private UserService userService;
 
     /**
+     * 系统
+     */
+    static final Integer USERIDSYSTEM = 0;
+
+    /**
      * 增加博客通知
      *
      * @param blog
@@ -156,6 +161,30 @@ public class NotifyServiceImpl extends ServiceImpl<NotifyMapper, Notify> impleme
         notify.setNotifyValue(follow.getCreateUserName()+"关注了您");
 
         notify.setTouserId(follow.getFollowUser());
+        notify.setNotifyStatus(NotifyConstant.NotifyStatus.NOREAD.getName());
+
+        return super.save(notify);
+    }
+
+    /**
+     * 拜师收徒通知
+     *
+     * @param userId
+     * @param notifyType
+     * @Param:
+     * @return:
+     * @Author: MaSiyi
+     * @Date: 2021/12/9
+     */
+    @Override
+    public Boolean addMasterApprenticeNotify(Integer userId, NotifyConstant.NotifyType notifyType) {
+        Notify notify = new Notify();
+        notify.setType(notifyType.getName());
+        notify.setNotifyTitle(notifyType.getValue()+"通知");
+        notify.setNotifyValue("您收到了一条"+notifyType.getValue()+"请求");
+        notify.setUserId(USERIDSYSTEM);
+        notify.setTouserId(userId);
+        notify.setCreateTime(LocalDateTime.now());
         notify.setNotifyStatus(NotifyConstant.NotifyStatus.NOREAD.getName());
 
         return super.save(notify);

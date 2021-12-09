@@ -53,4 +53,15 @@ public interface INotifyService extends IService<Notify> {
      * @Date: 2021/12/8
      */
     Boolean addFollowNotify(Follow follow,NotifyConstant.NotifyType notifyType);
+
+    /**
+     * 拜师收徒通知
+     *
+     * @Param:
+     * @return:
+     * @Author: MaSiyi
+     * @Date: 2021/12/9
+     */
+    Boolean addMasterApprenticeNotify(Integer userId,NotifyConstant.NotifyType notifyType);
+
 }

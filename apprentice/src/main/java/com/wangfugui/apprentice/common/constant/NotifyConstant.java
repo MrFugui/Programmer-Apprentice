@@ -24,7 +24,15 @@ public interface NotifyConstant {
         /**
          * 系统
          */
-        SYSTEM ("system","系统");
+        SYSTEM ("system","系统"),
+        /**
+         * 拜师
+         */
+        MASTER("master","拜师"),
+        /**
+         * 收徒
+         */
+        APPRENTICE("apprentice","收徒");
 
         String name;
         String value;
