@@ -1,4 +1,6 @@
 package com.wangfugui.apprentice.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangfugui.apprentice.common.constant.NotifyConstant;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author MrFugui
@@ -31,6 +33,7 @@ public class ApprentServiceImpl extends ServiceImpl<ApprentMapper, Apprent> impl
     private UserService userService;
     @Autowired
     private INotifyService notifyService;
+
 
     /**
      * 师傅列表
@@ -81,7 +84,7 @@ public class ApprentServiceImpl extends ServiceImpl<ApprentMapper, Apprent> impl
         //拜师
         if (ApprenticeEnum.Master.getType().equals(askType)) {
             aBoolean = notifyService.addMasterApprenticeNotify(sendAskDto.getToUserId(), NotifyConstant.NotifyType.MASTER);
-        } else if (ApprenticeEnum.Apprentice.getType().equals(askType)){
+        } else if (ApprenticeEnum.Apprentice.getType().equals(askType)) {
             aBoolean = notifyService.addMasterApprenticeNotify(sendAskDto.getToUserId(), NotifyConstant.NotifyType.APPRENTICE);
         }
 
@@ -98,6 +101,26 @@ public class ApprentServiceImpl extends ServiceImpl<ApprentMapper, Apprent> impl
         return ResponseUtils.success(aBoolean);
     }
 
+    /**
+     * 请求列表
+     *
+     * @Param: []
+     * @return: com.wangfugui.apprentice.common.util.ResponseUtils
+     * @Author: MaSiyi
+     * @Date: 2021/12/11
+     */
+    @Override
+    public ResponseUtils askList() {
+        User userInfo = userService.getUserInfo();
+        QueryWrapper<Apprent> apprentQueryWrapper = new QueryWrapper<>();
+        Integer userId = userInfo.getId();
+        LambdaQueryWrapper<Apprent> eq = apprentQueryWrapper.lambda().eq(Apprent::getParentId, userId).or().eq(Apprent::getUserId, userId);
+        return ResponseUtils.success(apprentMapper.selectList(eq));
+    }
 
+    @Override
+    public ResponseUtils agree(Apprent apprent) {
 
+        return ResponseUtils.success(updateById(apprent));
+    }
 }

@@ -2,6 +2,7 @@ package com.wangfugui.apprentice.controller;
 
 
 import com.wangfugui.apprentice.common.util.ResponseUtils;
+import com.wangfugui.apprentice.dao.domain.Apprent;
 import com.wangfugui.apprentice.dao.dto.SendAskDto;
 import com.wangfugui.apprentice.service.IApprentService;
 import io.swagger.annotations.Api;
@@ -49,5 +50,22 @@ public class ApprentController {
         return apprentService.sendMasterApprenticeAsk(sendAskDto);
 
     }
+
+    @GetMapping("/askList")
+    @ApiOperation("请求列表")
+    public ResponseUtils askList() {
+        return apprentService.askList();
+    }
+
+
+
+
+    @GetMapping("/agree")
+    @ApiOperation("同意拜师收徒请求")
+    public ResponseUtils agree(@RequestBody Apprent apprent) {
+        return apprentService.agree(apprent);
+    }
+
+
 }
 
