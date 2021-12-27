@@ -120,7 +120,6 @@ public class ApprentServiceImpl extends ServiceImpl<ApprentMapper, Apprent> impl
 
     @Override
     public ResponseUtils agree(Apprent apprent) {
-
         return ResponseUtils.success(updateById(apprent));
     }
 }

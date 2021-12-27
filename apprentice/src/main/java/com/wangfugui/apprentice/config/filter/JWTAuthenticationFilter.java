@@ -2,6 +2,7 @@ package com.wangfugui.apprentice.config.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wangfugui.apprentice.common.constant.enums.CodeEnums;
 import com.wangfugui.apprentice.common.util.JwtTokenUtils;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.config.springsecurity.JwtUser;
@@ -71,7 +72,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         String role = "";
         Collection<? extends GrantedAuthority> authorities = jwtUser.getAuthorities();
-        for (GrantedAuthority authority : authorities){
+        for (GrantedAuthority authority : authorities) {
             role = authority.getAuthority();
         }
 
@@ -80,7 +81,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 但是这里创建的token只是单纯的token
         // 按照jwt的规定，最后请求的时候应该是 `Bearer token`
         response.setHeader("Authorization", JwtTokenUtils.TOKEN_PREFIX + token);
-        response.addCookie(new Cookie("Authorization",token));
+        response.addCookie(new Cookie("Authorization", token));
+        String result = JSONObject.toJSONString(ResponseUtils.build(CodeEnums.SUCCESS.getCode(), CodeEnums.SUCCESS.getMsg()));
+        try {
+            response.setContentType("application/json;charset=UTF-8");
+            response.getWriter().write(result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

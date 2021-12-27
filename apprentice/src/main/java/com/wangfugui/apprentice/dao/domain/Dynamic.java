@@ -1,5 +1,7 @@
 package com.wangfugui.apprentice.dao.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -26,7 +28,8 @@ public class Dynamic implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("表id")
-      private Integer id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     @ApiModelProperty("动态内容")
     private String dynamicText;
@@ -52,7 +55,7 @@ public class Dynamic implements Serializable {
     @ApiModelProperty("地址")
     private String address;
 
-    public Dynamic( String dynamicText,Integer id) {
+    public Dynamic(String dynamicText, Integer id) {
         this.id = id;
         this.dynamicText = dynamicText;
     }

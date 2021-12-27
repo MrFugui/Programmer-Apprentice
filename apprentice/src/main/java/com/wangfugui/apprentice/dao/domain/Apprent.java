@@ -2,14 +2,15 @@ package com.wangfugui.apprentice.dao.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author MrFugui
@@ -21,7 +22,7 @@ public class Apprent implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("id")
-      @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @ApiModelProperty("用户id")
@@ -135,16 +136,16 @@ public class Apprent implements Serializable {
     @Override
     public String toString() {
         return "Apprent{" +
-        "id=" + id +
-        ", userId=" + userId +
-        ", userName=" + userName +
-        ", parentId=" + parentId +
-        ", parentName=" + parentName +
-        ", parentLevel=" + parentLevel +
-        ", apprentTime=" + apprentTime +
-        ", apprentStatus=" + apprentStatus +
-        ", dismissTime=" + dismissTime +
-        ", finishTime=" + finishTime +
-        "}";
+                "id=" + id +
+                ", userId=" + userId +
+                ", userName=" + userName +
+                ", parentId=" + parentId +
+                ", parentName=" + parentName +
+                ", parentLevel=" + parentLevel +
+                ", apprentTime=" + apprentTime +
+                ", apprentStatus=" + apprentStatus +
+                ", dismissTime=" + dismissTime +
+                ", finishTime=" + finishTime +
+                "}";
     }
 }

@@ -2,8 +2,8 @@ package com.wangfugui.apprentice.controller;
 
 
 import com.wangfugui.apprentice.common.util.JwtTokenUtils;
-import com.wangfugui.apprentice.dao.dto.ChatUser;
 import com.wangfugui.apprentice.dao.domain.User;
+import com.wangfugui.apprentice.dao.dto.ChatUser;
 import com.wangfugui.apprentice.service.UserService;
 import com.wangfugui.apprentice.service.WebSocketServer;
 import io.swagger.annotations.Api;
@@ -22,7 +22,6 @@ import javax.websocket.Session;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
@@ -72,22 +71,22 @@ public class ChatController {
         return "chatroom";
     }
 
-    @RequestMapping("/login")
-    @ApiOperation("登录路由")
-    public String login(HttpServletRequest request) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-            return "login";
-        }
-        //如果没有cookie则返回登录页面
-        List<Cookie> collect = Arrays.stream(cookies).filter(cookie -> cookie.getName()
-                .contains(JwtTokenUtils.TOKEN_HEADER)).collect(Collectors.toList());
-
-        if (collect.isEmpty()) {
-            return "login";
-        }
-        return "home";
-    }
+//    @RequestMapping("/login")
+//    @ApiOperation("登录路由")
+//    public String login(HttpServletRequest request) {
+//        Cookie[] cookies = request.getCookies();
+//        if (cookies == null) {
+//            return "login";
+//        }
+//        //如果没有cookie则返回登录页面
+//        List<Cookie> collect = Arrays.stream(cookies).filter(cookie -> cookie.getName()
+//                .contains(JwtTokenUtils.TOKEN_HEADER)).collect(Collectors.toList());
+//
+//        if (collect.isEmpty()) {
+//            return "login";
+//        }
+//        return "home";
+//    }
 
 
     @ApiOperation("获取聊天用户")
