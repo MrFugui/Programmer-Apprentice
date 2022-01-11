@@ -1,7 +1,6 @@
 package com.wangfugui.apprentice.controller;
 
 import com.wangfugui.apprentice.common.util.ResponseUtils;
-import com.wangfugui.apprentice.dao.domain.User;
 import com.wangfugui.apprentice.dao.dto.UserRegisterDto;
 import com.wangfugui.apprentice.service.UserService;
 import io.swagger.annotations.Api;
@@ -38,20 +37,20 @@ public class UserController {
 
     @ApiOperation("根据名称查询用户")
     @GetMapping("/getUserInfoForName")
-    public User getUserInfoForName(@RequestParam String username){
-        return userService.getUserInfoForName(username);
+    public ResponseUtils getUserInfoForName(@RequestParam String username){
+        return ResponseUtils.success(userService.getUserInfoForName(username));
     }
 
     @ApiOperation("根据Id查询用户")
     @GetMapping("/getUserInfoForId")
-    public User getUserInfoForId(@RequestParam String userId){
-        return userService.getUserInfoForId(userId);
+    public ResponseUtils getUserInfoForId(@RequestParam String userId){
+        return ResponseUtils.success(userService.getUserInfoForId(userId));
     }
 
     @ApiOperation("查询用户信息")
     @GetMapping("/getUserInfo")
-    public User getUserInfo(){
-        return userService.getUserInfo();
+    public ResponseUtils getUserInfo(){
+        return ResponseUtils.success(userService.getUserInfo());
     }
 
 

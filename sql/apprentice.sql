@@ -11,7 +11,7 @@
  Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 08/12/2021 11:20:43
+ Date: 11/01/2022 17:34:00
 */
 
 SET NAMES utf8mb4;
@@ -29,11 +29,16 @@ CREATE TABLE `apprent`  (
   `parent_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '师父名称',
   `parent_level` int(10) NULL DEFAULT NULL COMMENT '师父等级',
   `apprent_time` datetime(0) NULL DEFAULT NULL COMMENT '拜师时间',
-  `apprent_status` int(10) NULL DEFAULT NULL COMMENT '师徒关系状态',
+  `apprent_status` int(10) NULL DEFAULT NULL COMMENT '师徒关系状态0申请中1已拜师2已解除3已拒绝',
   `dismiss_time` datetime(0) NULL DEFAULT NULL COMMENT '解除关系时间',
   `finish_time` datetime(0) NULL DEFAULT NULL COMMENT '出师时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '师徒表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '师徒表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of apprent
+-- ----------------------------
+INSERT INTO `apprent` VALUES (1, 5, '123', 5, '1', NULL, NULL, 0, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for blog
@@ -61,10 +66,10 @@ CREATE TABLE `blog`  (
 -- ----------------------------
 -- Records of blog
 -- ----------------------------
-INSERT INTO `blog` VALUES (1, 'string撒打发斯蒂芬水电费是', 'string', 0, 1, 7, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
-INSERT INTO `blog` VALUES (2, 'string', 'string', 0, 2, 6, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
-INSERT INTO `blog` VALUES (3, 'string', 'string', 0, 3, 5, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
-INSERT INTO `blog` VALUES (4, 'string', 'string', 0, 4, 4, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (1, 'string撒打发斯蒂芬水电费是', 'string', 0, 1, 7, NULL, 0, 5, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (2, 'string', 'string', 0, 2, 6, NULL, 0, 5, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (3, 'string', 'string', 0, 3, 5, NULL, 0, 5, 0, 0, 0, 0, 'string', NULL);
+INSERT INTO `blog` VALUES (4, 'string', 'string', 0, 4, 4, NULL, 0, 5, 0, 0, 0, 0, 'string', NULL);
 INSERT INTO `blog` VALUES (5, 'string', 'string', 0, 5, 3, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
 INSERT INTO `blog` VALUES (6, 'string', 'string', 0, 6, 2, NULL, 0, 0, 0, 0, 0, 0, 'string', NULL);
 INSERT INTO `blog` VALUES (7, 'string', 'string', 0, 7, 1, NULL, 0, NULL, 0, 0, 0, 0, 'string', NULL);
@@ -138,7 +143,7 @@ CREATE TABLE `dynamic`  (
   `create_user` int(11) NULL DEFAULT NULL COMMENT '创建人',
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '动态表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '动态表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of dynamic
@@ -146,6 +151,10 @@ CREATE TABLE `dynamic`  (
 INSERT INTO `dynamic` VALUES (1, 'string少时诵诗书', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 'string');
 INSERT INTO `dynamic` VALUES (2, 'string', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 'string');
 INSERT INTO `dynamic` VALUES (3, 'string', 0, 0, 0, '2021-11-26 08:52:28', 0, 0, 'string');
+INSERT INTO `dynamic` VALUES (4, 'sdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dynamic` VALUES (5, '123123113', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dynamic` VALUES (6, '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `dynamic` VALUES (7, '11', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for follow
@@ -181,7 +190,7 @@ CREATE TABLE `function`  (
   `delete_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '删除标记，0未删除，1删除',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `url`(`url`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 258 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '功能模块表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 249 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '功能模块表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of function
@@ -284,7 +293,7 @@ CREATE TABLE `notify`  (
   `read_time` datetime(0) NULL DEFAULT NULL COMMENT '查看时间',
   `notify_status` int(11) NULL DEFAULT 0 COMMENT '通知状态1已读0未读',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '通知表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '通知表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of notify
@@ -312,6 +321,9 @@ INSERT INTO `notify` VALUES (20, 'comment', '评论通知', '123评论了您的s
 INSERT INTO `notify` VALUES (21, 'good', '点赞通知', '123点赞了您的string撒打发斯...', 5, 0, '2021-12-06 15:29:34', NULL, 0);
 INSERT INTO `notify` VALUES (22, 'good', '点赞通知', '123点赞了您的string撒打发斯...', 5, 0, '2021-12-06 15:43:47', NULL, 0);
 INSERT INTO `notify` VALUES (23, 'good', '点赞通知', '123点赞了您的string撒打发斯...', 5, 0, '2021-12-06 15:43:53', NULL, 0);
+INSERT INTO `notify` VALUES (24, 'master', '拜师通知', '您收到了一条拜师请求', 0, 1111, '2021-12-09 16:54:18', NULL, 0);
+INSERT INTO `notify` VALUES (25, 'master', '拜师通知', '您收到了一条拜师请求', 0, 1111, '2021-12-09 16:54:35', NULL, 0);
+INSERT INTO `notify` VALUES (26, 'apprentice', '收徒通知', '您收到了一条收徒请求', 0, 5, '2022-01-11 17:30:31', NULL, 0);
 
 -- ----------------------------
 -- Table structure for role
@@ -344,7 +356,7 @@ CREATE TABLE `system_config`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统配置表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of system_config
@@ -374,11 +386,11 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, NULL, 'fugui', '123', 2, NULL, 1, NULL, NULL, 0, NULL, '2021-10-25 10:44:35');
-INSERT INTO `user` VALUES (2, NULL, 'admin', '123', 1, NULL, 1, NULL, NULL, 0, NULL, '2021-10-23 15:53:43');
-INSERT INTO `user` VALUES (4, NULL, 'wangfugui', '$2a$10$gpq7aq5CM0JijheXM7M53.SaM/5t6JZFa9oTH3HfMIJ3fgT4BWTYO', 1, NULL, 1, NULL, NULL, 0, NULL, '2021-10-25 10:44:40');
-INSERT INTO `user` VALUES (5, NULL, '123', '$2a$10$guUqq8QDoSqT6tuYjLAJBetAPWFJSL4QBVmnrUAT.T42AmEpiG3.q', 2, NULL, 1, NULL, NULL, 0, NULL, '2021-10-30 11:48:32');
-INSERT INTO `user` VALUES (7, NULL, 'masiyi', '$2a$10$jo4bwvJS5pRYbn7Zqv7YD.sAbOBn.SY2i8ZiIZXptnyHMT60Vorfy', NULL, NULL, 1, NULL, NULL, 0, NULL, '2021-11-08 10:42:50');
+INSERT INTO `user` VALUES (1, '166358@', 'fugui', '123', 2, NULL, 1, NULL, NULL, 0, NULL, '2021-12-28 16:37:52');
+INSERT INTO `user` VALUES (2, '166358@', 'admin', '123', 1, NULL, 1, NULL, NULL, 0, NULL, '2021-12-28 16:37:52');
+INSERT INTO `user` VALUES (4, '166358@', 'wangfugui', '$2a$10$gpq7aq5CM0JijheXM7M53.SaM/5t6JZFa9oTH3HfMIJ3fgT4BWTYO', 1, NULL, 1, NULL, NULL, 0, NULL, '2021-12-28 16:37:52');
+INSERT INTO `user` VALUES (5, '166358@', '123', '$2a$10$guUqq8QDoSqT6tuYjLAJBetAPWFJSL4QBVmnrUAT.T42AmEpiG3.q', 2, 'http://120.76.201.118:9000/apprentice/profile.png', 1, NULL, NULL, 0, NULL, '2022-01-11 14:29:58');
+INSERT INTO `user` VALUES (7, '166358@', 'masiyi', '$2a$10$jo4bwvJS5pRYbn7Zqv7YD.sAbOBn.SY2i8ZiIZXptnyHMT60Vorfy', NULL, NULL, 1, NULL, NULL, 0, NULL, '2021-12-28 16:37:52');
 INSERT INTO `user` VALUES (8, 'string', 'string', '$2a$10$IT.A7pXA1Mxy63zf07qscu8lf.g4jLJOSWnTBvNDiM0.OGnEZoHmu', 0, 'string', 0, NULL, 'string', 0, NULL, '2021-11-22 16:38:58');
 
 -- ----------------------------
@@ -393,7 +405,7 @@ CREATE TABLE `user_business`  (
   `btn_str` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '按钮权限',
   `delete_flag` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0' COMMENT '删除标记，0未删除，1删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户/角色/模块关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 70 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户/角色/模块关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_business

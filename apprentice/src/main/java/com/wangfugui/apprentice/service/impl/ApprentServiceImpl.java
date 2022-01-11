@@ -16,6 +16,8 @@ import com.wangfugui.apprentice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 /**
  * <p>
  * 服务实现类
@@ -96,6 +98,8 @@ public class ApprentServiceImpl extends ServiceImpl<ApprentMapper, Apprent> impl
         apprent.setParentId(sendAskDto.getToUserId());
         apprent.setParentName(sendAskDto.getToUserName());
         apprent.setApprentStatus(ApprenticeEnum.APPLYING.getType());
+        apprent.setApprentTime(new Date());
+
         this.save(apprent);
 
         return ResponseUtils.success(aBoolean);

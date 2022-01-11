@@ -4,9 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
  * @author MrFugui
  * @since 2021-11-29
  */
+@Data
 @ApiModel(value = "Apprent对象", description = "")
 public class Apprent implements Serializable {
 
@@ -41,111 +43,17 @@ public class Apprent implements Serializable {
     private Integer parentLevel;
 
     @ApiModelProperty("拜师时间")
-    private LocalDateTime apprentTime;
+    private Date apprentTime;
 
     @ApiModelProperty("师徒关系状态")
     private Integer apprentStatus;
 
     @ApiModelProperty("解除关系时间")
-    private LocalDateTime dismissTime;
+    private Date dismissTime;
 
     @ApiModelProperty("出师时间")
-    private LocalDateTime finishTime;
+    private Date finishTime;
 
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getParentName() {
-        return parentName;
-    }
-
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
-    }
-
-    public Integer getParentLevel() {
-        return parentLevel;
-    }
-
-    public void setParentLevel(Integer parentLevel) {
-        this.parentLevel = parentLevel;
-    }
-
-    public LocalDateTime getApprentTime() {
-        return apprentTime;
-    }
-
-    public void setApprentTime(LocalDateTime apprentTime) {
-        this.apprentTime = apprentTime;
-    }
-
-    public Integer getApprentStatus() {
-        return apprentStatus;
-    }
-
-    public void setApprentStatus(Integer apprentStatus) {
-        this.apprentStatus = apprentStatus;
-    }
-
-    public LocalDateTime getDismissTime() {
-        return dismissTime;
-    }
-
-    public void setDismissTime(LocalDateTime dismissTime) {
-        this.dismissTime = dismissTime;
-    }
-
-    public LocalDateTime getFinishTime() {
-        return finishTime;
-    }
-
-    public void setFinishTime(LocalDateTime finishTime) {
-        this.finishTime = finishTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Apprent{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", userName=" + userName +
-                ", parentId=" + parentId +
-                ", parentName=" + parentName +
-                ", parentLevel=" + parentLevel +
-                ", apprentTime=" + apprentTime +
-                ", apprentStatus=" + apprentStatus +
-                ", dismissTime=" + dismissTime +
-                ", finishTime=" + finishTime +
-                "}";
-    }
 }
