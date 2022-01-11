@@ -42,6 +42,12 @@ public class UserController {
         return userService.getUserInfoForName(username);
     }
 
+    @ApiOperation("根据Id查询用户")
+    @GetMapping("/getUserInfoForId")
+    public User getUserInfoForId(@RequestParam String userId){
+        return userService.getUserInfoForId(userId);
+    }
+
     @ApiOperation("查询用户信息")
     @GetMapping("/getUserInfo")
     public User getUserInfo(){

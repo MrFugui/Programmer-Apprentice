@@ -34,4 +34,11 @@ public interface UserService {
      */
     User getUserInfo();
 
+    /** 根据id查询用户信息
+     * @Param: [userId]
+     * @return: com.wangfugui.apprentice.dao.domain.User
+     * @Author: MaSiyi
+     * @Date: 2022/1/11
+     */
+    User getUserInfoForId(String userId);
 }

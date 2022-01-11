@@ -1,6 +1,7 @@
 package com.wangfugui.apprentice.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.wangfugui.apprentice.common.constant.enums.CodeEnums;
@@ -152,4 +153,18 @@ public class UserServiceImpl implements UserService {
         return this.getUserInfoForName(userName);
     }
 
+    /**
+     * 根据id查询用户信息
+     *
+     * @param userId
+     * @Param: [userId]
+     * @return: com.wangfugui.apprentice.dao.domain.User
+     * @Author: MaSiyi
+     * @Date: 2022/1/11
+     */
+    @Override
+    public User getUserInfoForId(String userId) {
+        LambdaQueryWrapper<User> eq = new QueryWrapper<User>().lambda().eq(User::getId, userId);
+        return userMapper.selectOne(eq);
+    }
 }
