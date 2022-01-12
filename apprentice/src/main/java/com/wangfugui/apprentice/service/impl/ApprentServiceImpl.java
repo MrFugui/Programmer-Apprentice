@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -119,7 +122,15 @@ public class ApprentServiceImpl extends ServiceImpl<ApprentMapper, Apprent> impl
         QueryWrapper<Apprent> apprentQueryWrapper = new QueryWrapper<>();
         Integer userId = userInfo.getId();
         LambdaQueryWrapper<Apprent> eq = apprentQueryWrapper.lambda().eq(Apprent::getParentId, userId).or().eq(Apprent::getUserId, userId);
-        return ResponseUtils.success(apprentMapper.selectList(eq));
+        List<Apprent> data = apprentMapper.selectList(eq);
+        //拜师请求
+        List<Apprent> apprentList = data.stream().filter(f -> f.getParentId().equals(userInfo.getId())).collect(Collectors.toList());
+        //收徒请求
+        List<Apprent> masterLiser = data.stream().filter(f -> f.getUserId().equals(userInfo.getId())).collect(Collectors.toList());
+        HashMap<String, List<Apprent>> stringListHashMap = new HashMap<>();
+        stringListHashMap.put("apprentList", apprentList);`
+        stringListHashMap.put("masterLiser", masterLiser);
+        return ResponseUtils.success(stringListHashMap);
     }
 
     @Override
