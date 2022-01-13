@@ -52,6 +52,12 @@ public class UserController {
     public ResponseUtils getUserInfo(){
         return ResponseUtils.success(userService.getUserInfo());
     }
+//
+//    @ApiOperation("查询用户拓展信息")
+//    @GetMapping("/getUserInfo")
+//    public ResponseUtils getUserExtendInfo(){
+//        return ResponseUtils.success(userService.getUserExtendInfo());
+//    }
 
 
     @PostMapping("/register")

@@ -14,7 +14,7 @@ public enum CodeEnums {
 
     PARAMETER_NOT_EMPTY("0311", "参数不能为空"),
 
-    NO_CORRECT("0401", "请求不符，提示用户"),
+    NO_CORRECT("0401", "您长时间未操作,请重新登录"),
     NOT_SAFE("0402", "您的账户存在安全隐患，请重新登陆"),
     NO_RESULT("0404", "找不到接口"),
     NOT_LOGIN("0405", "未登录"),

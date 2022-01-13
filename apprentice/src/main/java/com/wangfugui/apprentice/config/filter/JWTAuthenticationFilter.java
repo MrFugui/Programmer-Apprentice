@@ -2,7 +2,6 @@ package com.wangfugui.apprentice.config.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wangfugui.apprentice.common.constant.enums.CodeEnums;
 import com.wangfugui.apprentice.common.util.JwtTokenUtils;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.config.springsecurity.JwtUser;
@@ -16,7 +15,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -80,9 +78,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 返回创建成功的token
         // 但是这里创建的token只是单纯的token
         // 按照jwt的规定，最后请求的时候应该是 `Bearer token`
-        response.setHeader("Authorization", JwtTokenUtils.TOKEN_PREFIX + token);
-        response.addCookie(new Cookie("Authorization", token));
-        String result = JSONObject.toJSONString(ResponseUtils.build(CodeEnums.SUCCESS.getCode(), CodeEnums.SUCCESS.getMsg()));
+        String authToken = JwtTokenUtils.TOKEN_PREFIX + token;
+        String result = JSONObject.toJSONString(ResponseUtils.success(authToken));
         try {
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(result);

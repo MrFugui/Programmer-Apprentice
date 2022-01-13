@@ -58,10 +58,10 @@ public class ApprentController {
     }
 
 
-    @GetMapping("/agree")
-    @ApiOperation("同意拜师收徒请求")
-    public ResponseUtils agree(@RequestBody Apprent apprent) {
-        return apprentService.agree(apprent);
+    @GetMapping("/updateStatus")
+    @ApiOperation("同意或拒绝拜师收徒请求")
+    public ResponseUtils updateStatus(@RequestBody Apprent apprent) {
+        return apprentService.updateStatus(apprent);
     }
 
 

@@ -59,6 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //放开注册,登录用户接口
                 .antMatchers("/user/register").anonymous()
                 .antMatchers("/login").anonymous()
+                .antMatchers("/loginvalidate").anonymous()
                 .antMatchers("/logoutSystem").anonymous()
                 .antMatchers("/chatroom").anonymous()
                 .antMatchers("/onlineusers").anonymous()

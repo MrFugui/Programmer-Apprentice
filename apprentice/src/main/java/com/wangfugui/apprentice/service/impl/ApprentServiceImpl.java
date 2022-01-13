@@ -128,13 +128,13 @@ public class ApprentServiceImpl extends ServiceImpl<ApprentMapper, Apprent> impl
         //收徒请求
         List<Apprent> masterLiser = data.stream().filter(f -> f.getUserId().equals(userInfo.getId())).collect(Collectors.toList());
         HashMap<String, List<Apprent>> stringListHashMap = new HashMap<>();
-        stringListHashMap.put("apprentList", apprentList);`
+        stringListHashMap.put("apprentList", apprentList);
         stringListHashMap.put("masterLiser", masterLiser);
         return ResponseUtils.success(stringListHashMap);
     }
 
     @Override
-    public ResponseUtils agree(Apprent apprent) {
+    public ResponseUtils updateStatus(Apprent apprent) {
         return ResponseUtils.success(updateById(apprent));
     }
 }

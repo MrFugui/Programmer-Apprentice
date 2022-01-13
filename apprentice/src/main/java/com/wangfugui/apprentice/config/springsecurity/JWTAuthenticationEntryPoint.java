@@ -28,14 +28,14 @@ public class JWTAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException exception) throws IOException, ServletException {
 
         String result = "";
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setStatus(HttpStatus.OK.value());
         response.setContentType("application/json;charset=UTF-8");
         if (exception instanceof BadCredentialsException || exception instanceof InternalAuthenticationServiceException) {
             response.setStatus(HttpStatus.BAD_REQUEST.value());
             result = JSONObject.toJSONString(ResponseUtils.msg(CodeEnums.PASSWORD_ERROR.getMsg()));
         } else if (exception instanceof InsufficientAuthenticationException
                 || exception instanceof NonceExpiredException) {
-            result = JSONObject.toJSONString(ResponseUtils.msg(CodeEnums.AUTH_ERROR.getMsg()));
+            result = JSONObject.toJSONString(ResponseUtils.build(CodeEnums.NO_CORRECT));
         } else if (exception instanceof UsernameNotFoundException) {
             result = JSONObject.toJSONString(ResponseUtils.msg(CodeEnums.NO_USER.getMsg()));
         } else {

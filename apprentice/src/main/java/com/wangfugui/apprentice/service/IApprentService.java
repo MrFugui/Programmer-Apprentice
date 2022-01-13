@@ -47,7 +47,7 @@ public interface IApprentService extends IService<Apprent> {
      * @Date: 2021/12/11
      * @param id
      */
-    ResponseUtils agree(Apprent id);
+    ResponseUtils updateStatus(Apprent id);
 
     /** 请求列表
      * @Param: []
