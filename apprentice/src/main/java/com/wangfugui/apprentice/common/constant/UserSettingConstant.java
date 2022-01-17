@@ -19,5 +19,9 @@ public interface UserSettingConstant {
      */
     String APPRENTICESETTING = "ApprenticeSetting";
 
+
+    /**
+     * 消息接收
+     */
     String NOTIFYUSERSETTING = "NotifyUserSetting";
 }

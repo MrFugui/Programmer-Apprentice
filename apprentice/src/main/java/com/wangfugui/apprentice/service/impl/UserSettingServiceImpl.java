@@ -1,5 +1,6 @@
 package com.wangfugui.apprentice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangfugui.apprentice.common.constant.UserSettingConstant;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
@@ -86,7 +87,6 @@ public class UserSettingServiceImpl extends ServiceImpl<UserSettingMapper, UserS
         //获取当前用户信息
         User userInfo = userService.getUserInfo();
         Field[] declaredFields = notifyUserSettingDto.getClass().getDeclaredFields();
-        ArrayList<UserSetting> userSettings = new ArrayList<>();
         UserSetting userSetting;
         for (int i = 0; i < declaredFields.length; i++) {
             userSetting = new UserSetting();
@@ -105,10 +105,12 @@ public class UserSettingServiceImpl extends ServiceImpl<UserSettingMapper, UserS
             userSetting.setCreateTime(LocalDateTime.now());
             userSetting.setUpdateTime(LocalDateTime.now());
             userSetting.setSettingGroup(UserSettingConstant.NOTIFYUSERSETTING);
-            userSettings.add(userSetting);
-        }
-        this.saveBatch(userSettings);
+            //根据userId和setkey更新设置表
+            UpdateWrapper<UserSetting> wrapper = new UpdateWrapper<>();
+            wrapper.lambda().eq(UserSetting::getUserId, userInfo.getId()).eq(UserSetting::getSettingKey, settingKey);
 
+            this.saveOrUpdate(userSetting,wrapper);
+        }
 
         return ResponseUtils.success();
     }
