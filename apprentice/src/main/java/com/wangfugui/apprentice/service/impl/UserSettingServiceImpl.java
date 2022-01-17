@@ -1,5 +1,6 @@
 package com.wangfugui.apprentice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangfugui.apprentice.common.constant.UserSettingConstant;
@@ -24,6 +25,7 @@ import org.springframework.util.ObjectUtils;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -161,4 +163,22 @@ public class UserSettingServiceImpl extends ServiceImpl<UserSettingMapper, UserS
         return ResponseUtils.success();
     }
 
+    /**
+     * 获取用户消息接收设置
+     *
+     * @Param: []
+     * @return: com.wangfugui.apprentice.common.util.ResponseUtils
+     * @Author: MaSiyi
+     * @Date: 2022/1/17
+     */
+    @Override
+    public ResponseUtils getNotifyUserSetting() {
+        //获取当前用户信息
+        User userInfo = userService.getUserInfo();
+        QueryWrapper<UserSetting> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(UserSetting::getUserId, userInfo.getId());
+
+        List<UserSetting> userSettings = userSettingMapper.selectList(wrapper);
+        return ResponseUtils.success(userSettings);
+    }
 }

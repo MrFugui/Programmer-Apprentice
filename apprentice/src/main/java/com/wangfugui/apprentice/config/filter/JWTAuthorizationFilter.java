@@ -54,7 +54,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             //返回json形式的错误信息
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json; charset=utf-8");
-            response.getWriter().write(JSONObject.toJSONString(ResponseUtils.build(CodeEnums.NO_CORRECT)));
+            response.getWriter().write(JSONObject.toJSONString(ResponseUtils.build(CodeEnums.NO_CORRECT.getCode(),e.getMessage())));
             response.getWriter().flush();
             return;
         }
@@ -66,7 +66,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX, "");
         boolean expiration = JwtTokenUtils.isExpiration(token);
         if (expiration) {
-            throw new TokenIsExpiredException("token超时了");
+            throw new TokenIsExpiredException("您长时间未操作,请重新登录");
         } else {
             String username = JwtTokenUtils.getUsername(token);
             String role = JwtTokenUtils.getUserRole(token);

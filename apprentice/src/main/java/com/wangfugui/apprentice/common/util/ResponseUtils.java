@@ -28,11 +28,11 @@ public class ResponseUtils {
 
 
     public static ResponseUtils success() {
-        return new ResponseUtils((Object)null, CodeEnums.SUCCESS_CODE);
+        return new ResponseUtils((Object)null, CodeEnums.SUCCESS);
     }
 
     public static ResponseUtils success(Object data) {
-        return new ResponseUtils(data, CodeEnums.SUCCESS_CODE);
+        return new ResponseUtils(data, CodeEnums.SUCCESS);
     }
 
 

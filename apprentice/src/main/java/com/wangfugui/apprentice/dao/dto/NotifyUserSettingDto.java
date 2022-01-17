@@ -15,12 +15,12 @@ public class NotifyUserSettingDto {
      * 收徒申请
      */
     @ApiModelProperty("收徒申请")
-    Boolean applicationForApprenticeship;
+    Boolean apprenticeApplication;
     /**
      * 拜师申请
      */
     @ApiModelProperty("拜师申请")
-    Boolean apprenticeshipApplication;
+    Boolean masterApplication;
     /**
      * 私信通知
      */

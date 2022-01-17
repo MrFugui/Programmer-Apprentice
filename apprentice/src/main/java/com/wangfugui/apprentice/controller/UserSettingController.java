@@ -37,11 +37,21 @@ public class UserSettingController {
     }
 
     @ApiOperation("消息接收设置")
-    @PostMapping("/notifyUserSetting")
+        @PostMapping("/notifyUserSetting")
     public ResponseUtils notifyUserSetting(@RequestBody NotifyUserSettingDto notifyUserSettingDto) {
 
         return userSettingService.notifyUserSetting(notifyUserSettingDto);
     }
+
+
+    @ApiOperation("获取用户消息接收设置")
+    @PostMapping("/getNotifyUserSetting")
+    public ResponseUtils getNotifyUserSetting() {
+
+        return userSettingService.getNotifyUserSetting();
+    }
+
+
 
     @ApiOperation("收徒拜师设置")
     @PostMapping("/apprenticeSetting")

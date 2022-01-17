@@ -41,4 +41,13 @@ public interface IUserSettingService extends IService<UserSetting> {
      * @Date: 2021/12/6
      */
     ResponseUtils apprenticeSetting(ApprenticeSettingDto apprenticeSettingDto);
+
+    /** 获取用户消息接收设置
+     * @Param: []
+     * @return: com.wangfugui.apprentice.common.util.ResponseUtils
+     * @Author: MaSiyi
+     * @Date: 2022/1/17
+     */
+    ResponseUtils getNotifyUserSetting();
+
 }
