@@ -9,6 +9,7 @@ import com.wangfugui.apprentice.dao.domain.UserSetting;
 import com.wangfugui.apprentice.dao.dto.ApprenticeSettingDto;
 import com.wangfugui.apprentice.dao.dto.ApprenticeSettingExtendDto;
 import com.wangfugui.apprentice.dao.dto.NotifyUserSettingDto;
+import com.wangfugui.apprentice.dao.dto.UserDto;
 import com.wangfugui.apprentice.dao.dto.UserExtendDto;
 import com.wangfugui.apprentice.dao.mapper.UserSettingMapper;
 import com.wangfugui.apprentice.service.IUserExtendService;
@@ -17,6 +18,7 @@ import com.wangfugui.apprentice.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
@@ -41,19 +43,32 @@ public class UserSettingServiceImpl extends ServiceImpl<UserSettingMapper, UserS
     private UserService userService;
 
     /**
-     * 更新用户拓展信息
+     * 更新用户信息
      *
-     * @param userExtendDto
+     * @param
      * @Param: [userExtendDto]
      * @return: com.wangfugui.apprentice.common.util.ResponseUtils
      * @Author: MaSiyi
      * @Date: 2021/12/4
      */
     @Override
-    public ResponseUtils updateUserInfo(UserExtendDto userExtendDto) {
+    public ResponseUtils updateUserInfo(UserDto userDto) {
+        User user = new User();
+        BeanUtils.copyProperties(userDto, user);
+        //本身信息
+        userService.saveOrUpdate(user);
+        //拓展信息
         UserExtend userExtend = new UserExtend();
-        BeanUtils.copyProperties(userExtendDto, userExtend);
-        return ResponseUtils.success(userExtendService.saveOrUpdate(userExtend));
+        UserExtendDto userExtendDto = userDto.getUserExtendDto();
+        if (!ObjectUtils.isEmpty(userExtendDto)) {
+
+            Integer extendId = userExtendDto.getExtendId();
+            BeanUtils.copyProperties(userExtendDto, userExtend);
+            userExtend.setId(extendId);
+            userExtendService.saveOrUpdate(userExtend);
+        }
+
+        return ResponseUtils.success();
     }
 
     /**

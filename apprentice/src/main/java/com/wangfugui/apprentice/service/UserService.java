@@ -1,5 +1,6 @@
 package com.wangfugui.apprentice.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.User;
 import com.wangfugui.apprentice.dao.dto.UserRegisterDto;
@@ -9,7 +10,7 @@ import com.wangfugui.apprentice.dao.dto.UserRegisterDto;
  * @version 1.0.0 2021/10/23
  * @since JDK 1.8.0
  */
-public interface UserService {
+public interface UserService extends IService<User> {
     ResponseUtils listUser();
 
     User getUserInfoForName(String username);
@@ -41,4 +42,6 @@ public interface UserService {
      * @Date: 2022/1/11
      */
     User getUserInfoForId(String userId);
+
+
 }

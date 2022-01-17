@@ -20,19 +20,10 @@ public class UserExtendDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
-
-    @ApiModelProperty("用户id")
-    private Integer userId;
-
-    @ApiModelProperty("邮箱")
-    private Integer emailId;
+    private Integer extendId;
 
     @ApiModelProperty("账号名称")
     private String nickName;
-
-    @ApiModelProperty("手机号码")
-    private String phone;
 
     @ApiModelProperty("性别1男0女2不透露")
     private Integer gender;

@@ -27,6 +27,19 @@ public class FileController {
     MinioUtil minioUtil;
 
     @ApiOperation("上传一个文件")
+    @RequestMapping(value = "/fileuploadOne", method = RequestMethod.POST)
+    public ResponseUtils fileuploadOne(@RequestParam MultipartFile file) {
+        String fileUrl;
+        try {
+            fileUrl = minioUtil.uploadFileOne(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseUtils.msg("上传文件出错，请稍后再试");
+        }
+        return ResponseUtils.success(fileUrl);
+    }
+
+    @ApiOperation("上传一个文件指定桶")
     @RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
     public ResponseUtils fileupload(@RequestParam MultipartFile uploadfile, @RequestParam String bucket,
                                     @RequestParam(required = false) String objectName) {

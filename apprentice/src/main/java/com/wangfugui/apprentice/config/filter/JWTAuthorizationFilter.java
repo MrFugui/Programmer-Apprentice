@@ -1,6 +1,7 @@
 package com.wangfugui.apprentice.config.filter;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wangfugui.apprentice.common.constant.enums.CodeEnums;
 import com.wangfugui.apprentice.common.exception.TokenIsExpiredException;
 import com.wangfugui.apprentice.common.util.JwtTokenUtils;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
@@ -53,8 +54,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             //返回json形式的错误信息
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json; charset=utf-8");
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            response.getWriter().write(JSONObject.toJSONString(ResponseUtils.msg(e.getMessage())));
+            response.getWriter().write(JSONObject.toJSONString(ResponseUtils.build(CodeEnums.NO_CORRECT)));
             response.getWriter().flush();
             return;
         }

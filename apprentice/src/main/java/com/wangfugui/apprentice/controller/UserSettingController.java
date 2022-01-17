@@ -4,7 +4,7 @@ package com.wangfugui.apprentice.controller;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.dto.ApprenticeSettingDto;
 import com.wangfugui.apprentice.dao.dto.NotifyUserSettingDto;
-import com.wangfugui.apprentice.dao.dto.UserExtendDto;
+import com.wangfugui.apprentice.dao.dto.UserDto;
 import com.wangfugui.apprentice.service.IUserSettingService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,8 +32,8 @@ public class UserSettingController {
 
     @ApiOperation("更新个人信息")
     @PostMapping("/updateUserInfo")
-    public ResponseUtils updateUserInfo(@RequestBody UserExtendDto userExtendDto) {
-        return userSettingService.updateUserInfo(userExtendDto);
+    public ResponseUtils updateUserInfo(@RequestBody UserDto userDto) {
+        return userSettingService.updateUserInfo(userDto);
     }
 
     @ApiOperation("消息接收设置")

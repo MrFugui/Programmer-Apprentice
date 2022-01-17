@@ -58,7 +58,7 @@ public class ApprentController {
     }
 
 
-    @GetMapping("/updateStatus")
+    @PostMapping("/updateStatus")
     @ApiOperation("同意或拒绝拜师收徒请求")
     public ResponseUtils updateStatus(@RequestBody Apprent apprent) {
         return apprentService.updateStatus(apprent);

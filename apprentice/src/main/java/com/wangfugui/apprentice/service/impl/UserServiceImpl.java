@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wangfugui.apprentice.common.constant.enums.CodeEnums;
 import com.wangfugui.apprentice.common.util.RedisUtils;
 import com.wangfugui.apprentice.common.util.ResponseUtils;
@@ -28,7 +29,7 @@ import java.util.List;
  * @since JDK 1.8.0
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -167,4 +168,5 @@ public class UserServiceImpl implements UserService {
         LambdaQueryWrapper<User> eq = new QueryWrapper<User>().lambda().eq(User::getId, userId);
         return userMapper.selectOne(eq);
     }
+
 }

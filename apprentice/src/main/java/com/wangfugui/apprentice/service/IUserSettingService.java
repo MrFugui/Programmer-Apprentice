@@ -5,7 +5,7 @@ import com.wangfugui.apprentice.common.util.ResponseUtils;
 import com.wangfugui.apprentice.dao.domain.UserSetting;
 import com.wangfugui.apprentice.dao.dto.ApprenticeSettingDto;
 import com.wangfugui.apprentice.dao.dto.NotifyUserSettingDto;
-import com.wangfugui.apprentice.dao.dto.UserExtendDto;
+import com.wangfugui.apprentice.dao.dto.UserDto;
 
 /**
  * <p>
@@ -22,8 +22,9 @@ public interface IUserSettingService extends IService<UserSetting> {
      * @return: com.wangfugui.apprentice.common.util.ResponseUtils
      * @Author: MaSiyi
      * @Date: 2021/12/4
+     * @param userExtendDto
      */
-    ResponseUtils updateUserInfo(UserExtendDto userExtendDto);
+    ResponseUtils updateUserInfo(UserDto userExtendDto);
 
     /** 消息接收
      * @Param: [notifyUserSettingDto]

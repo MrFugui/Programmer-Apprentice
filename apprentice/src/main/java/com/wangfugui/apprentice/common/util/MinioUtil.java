@@ -19,6 +19,7 @@ import io.minio.messages.Bucket;
 import io.minio.messages.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -29,7 +30,10 @@ public class MinioUtil {
 
 	@Autowired
     private MinioClient minioClient;
-	
+
+	private final static String BUCKET = "apprentice";
+	private final static String imgUrl = "http://120.76.201.118:9000/apprentice/";
+
 	/**
 	 * 创建一个桶
 	 */
@@ -47,7 +51,17 @@ public class MinioUtil {
 		minioClient.putObject(PutObjectArgs.builder().bucket(bucket).object(objectName)
 				.stream(stream, -1, 10485760).build());
 	}
-	
+
+	/**
+	 * 上传一个文件
+	 */
+	public String uploadFileOne(MultipartFile file) throws Exception {
+		String originalFilename = file.getOriginalFilename();
+		this.uploadFile(file.getInputStream(),BUCKET, originalFilename);
+		return imgUrl + originalFilename;
+	}
+
+
 	/**
 	 * 列出所有的桶
 	 */
